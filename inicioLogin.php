@@ -8,10 +8,10 @@
 <body>
 	<div id="loginForm">
 
-			<p>Nickname: <input type="text" name="nick" required="true"></p>
+			<p>email: <input type="text" name="email" id="email" required="true"></p>
 	    	<p>Password: <input type="password" name="password" required="true"></p>
 
-	    <button onclick="">Login</button>
+	    <button onclick="validarEmail()">Login</button>
 
 		<!-- <form action="principal.php" method="post" >
 			<p>Nickname: <input type="text" name="nick" required="true"></p>

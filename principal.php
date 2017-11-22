@@ -5,7 +5,7 @@
 </head>
 <body>
 	<?php
-		$nombre = $_POST["nick"];
+		$nombre = $_POST["email"];
 		$password = $_POST["password"];
 
 		echo ("Hola ".$nombre.", su contraseña es: ".$password);
