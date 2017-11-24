@@ -28,7 +28,7 @@
 		$query = $pdo->prepare("SELECT ID FROM Usuarios WHERE Email = '".$_POST["email"]."'");
 		$query->execute();
 		if($query){
-			$id = $query->fech();
+			$id = $query->fetch();
 			$query2 = $pdo->prepare("SELECT ID FROM Usuarios WHERE ID = '".$id."' AND Password = '".$password = $_POST["password"]."'");
 			$query2->execute();
 			if($query2){

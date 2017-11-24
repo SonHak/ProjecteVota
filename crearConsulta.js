@@ -82,6 +82,17 @@ function mensajeError(event){
 
 function eliminarRespuestas(){
 	var arrayInputs = document.getElementsByTagName("input");
+	var arrayLabels = document.getElementsByTagName("label");
 	
+	var prueba = arrayInputs.length;
 	
+	for(var i = prueba ; i > 2 ; i--){
+			eliminarElemento();
+	}
+	
+}
+function eliminarElemento(){
+	var padre = document.getElementById("respuestas");
+	padre.removeChild(padre.lastChild);
+	padre.removeChild(padre.lastChild);
 }
