@@ -8,14 +8,17 @@
 <body>
 	<div id="loginForm">
 	<?php
+		session_start();
+		
+
 		$hostname = "localhost";
 		$dbname = "projecteVota";
 		$username = "root";
-		$pass = "Kemaku12";
+		$pass = "AWS2-31";
 
 		$pdo = new PDO ("mysql:host=$hostname;dbname=$dbname", "$username", "$pass");
 
-	if($_POST["email"] == null){	
+	if(!isset($_POST["email"])){	
 
 	 echo('<form action="inicioLogin.php" method="post" >
 			<p>EMAIL: <input type="text" name="email" required="true"></p>
@@ -27,13 +30,42 @@
 	}else{
 		$query = $pdo->prepare("SELECT ID FROM Usuarios WHERE Email = '".$_POST["email"]."'");
 		$query->execute();
-		if($query){
-			$id = $query->fetch();
-			$query2 = $pdo->prepare("SELECT ID FROM Usuarios WHERE ID = '".$id."' AND Password = '".$password = $_POST["password"]."'");
+		$id = $query->fetch();
+
+		if($id){
+			$query2 = $pdo->prepare("SELECT Password FROM Usuarios WHERE ID = ".$id[0]);
 			$query2->execute();
-			if($query2){
-				header('Location: principla.php');
+
+			$psswrd = $query2->fetch();
+			if($psswrd[0] == $_POST["password"]){
+
+				$query3 = $pdo->prepare("SELECT Email FROM Usuarios WHERE Email = '".$_POST["email"]."'");
+				$query->execute();
+
+				$_SESSION["user"]= $query3->fetch();;
+
+				header('Location: principal.php');
+			}else{
+
+				 echo(' <p style="color:red; font-size:20px">Password erroneo!</p>
+				 	<br>
+				 	<form action="inicioLogin.php" method="post" >
+					<p>EMAIL: <input type="text" name="email" required="true"></p>
+			    	<p>Password: <input type="password" name="password" required="true"></p>
+
+			        <input value="Login" type="submit" id="login" />
+			     </form>');
+
 			}
+		} else {
+			echo(' <p style="color:red; font-size:20px">Email no encontrado!</p>
+				<br>
+				<form action="inicioLogin.php" method="post" >
+					<p>EMAIL: <input type="text" name="email" required="true"></p>
+			    	<p>Password: <input type="password" name="password" required="true"></p>
+
+			        <input value="Login" type="submit" id="login" />
+			     </form>');
 		}
 		
 	}

@@ -19,7 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de dades: `projecteVota`
 --
-
+DROP DATABASE IF EXISTS `projecteVota`;
+CREATE DATABASE `projecteVota`;
 -- --------------------------------------------------------
 
 --
