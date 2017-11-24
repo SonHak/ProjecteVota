@@ -1,7 +1,10 @@
+//Variable global que cuenta cuantas respuestas (inputs) hay
 var cantidadRespuestas = 1;
+
 
 function crearConsulta(){
 	
+	//recogemos los labels, el textarea y los inputs y los guardamos en variables
 	var label = document.getElementsByTagName("label");
 	var pregunta = document.getElementsByTagName("textarea");
 	var respuesta = document.getElementsByTagName("input");
@@ -55,6 +58,7 @@ function crearLabel(){
 function crearInput(){
 	var padre = document.getElementById("respuestas");
 	var inputNuevo = document.createElement("INPUT");
+	inputNuevo.setAttribute("id",cantidadRespuestas-1);
 	inputNuevo.setAttribute("onBlur","mensajeError(event)");
 	inputNuevo.setAttribute("onFocus","quitarFondoRojo(event)");
 	
@@ -74,4 +78,10 @@ function quitarFondoRojo(event){
 function mensajeError(event){
 	var elemento = event.currentTarget;
 	elemento.style.boxShadow = "0 0 5px red";
+}
+
+function eliminarRespuestas(){
+	var arrayInputs = document.getElementsByTagName("input");
+	
+	
 }

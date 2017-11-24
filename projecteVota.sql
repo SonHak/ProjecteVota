@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Temps de generació: 22-11-2017 a les 17:26:56
+-- Temps de generació: 24-11-2017 a les 16:29:04
 -- Versió del servidor: 5.7.20-0ubuntu0.16.04.1
 -- Versió de PHP: 7.0.22-0ubuntu0.16.04.1
 
@@ -29,7 +29,19 @@ SET time_zone = "+00:00";
 CREATE TABLE `Pregunta` (
   `ID` int(3) NOT NULL,
   `Pregunta` varchar(200) NOT NULL,
-  `ID_Usuario` int(3) NOT NULL
+  `ID_Usuario` int(3) NOT NULL,
+  `DataInici` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `relacionUsuarioVota`
+--
+
+CREATE TABLE `relacionUsuarioVota` (
+  `ID_Usuario` int(11) NOT NULL,
+  `ID_Votar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -53,10 +65,16 @@ CREATE TABLE `Usuarios` (
   `ID` int(3) NOT NULL,
   `Nombre` varchar(20) DEFAULT NULL,
   `Email` varchar(30) NOT NULL,
-  `Password` int(20) NOT NULL,
-  `Admin` tinyint(1) NOT NULL,
-  `ID_Votacion` int(3) NOT NULL
+  `Password` varchar(20) NOT NULL,
+  `Admin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Bolcant dades de la taula `Usuarios`
+--
+
+INSERT INTO `Usuarios` (`ID`, `Nombre`, `Email`, `Password`, `Admin`) VALUES
+(1, 'prueba', 'prueba@prueba.com', '1234', 1);
 
 -- --------------------------------------------------------
 
@@ -68,6 +86,13 @@ CREATE TABLE `Votacion` (
   `ID` int(3) NOT NULL,
   `Respuesta` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Bolcant dades de la taula `Votacion`
+--
+
+INSERT INTO `Votacion` (`ID`, `Respuesta`) VALUES
+(1, '');
 
 --
 -- Indexos per taules bolcades
@@ -110,12 +135,12 @@ ALTER TABLE `Pregunta`
 -- AUTO_INCREMENT per la taula `Usuarios`
 --
 ALTER TABLE `Usuarios`
-  MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT per la taula `Votacion`
 --
 ALTER TABLE `Votacion`
-  MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
