@@ -5,8 +5,8 @@
 </head>
 <body>
 	<?php
-		$nombre = $_POST["email"];
-		$password = $_POST["password"];
+		$nombre = $_SESSION["user"];
+		
 
 		echo ("Hola ".$nombre.", su contraseña es: ".$password);
 
