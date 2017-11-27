@@ -10,7 +10,7 @@
 	<?php
 		session_start();
 	
-		include("/var/www/html/config.php");
+		include("/var/www/html/ProjecteVota/config.php");
 
 	if(!isset($_POST["email"])){	
 
