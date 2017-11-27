@@ -9,14 +9,8 @@
 	<div id="loginForm">
 	<?php
 		session_start();
-		
-
-		$hostname = "localhost";
-		$dbname = "projecteVota";
-		$username = "root";
-		$pass = "AWS2-31";
-
-		$pdo = new PDO ("mysql:host=$hostname;dbname=$dbname", "$username", "$pass");
+	
+		include("/var/www/html/ProjecteVota/config.php");
 
 	if(!isset($_POST["email"])){	
 
