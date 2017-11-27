@@ -165,53 +165,70 @@ function eliminarElemento(elemento){
 	
 }
 
+//la siguiente funcion crea los inputs y el label para la fecha de inicio
 function crearFechaInicio(){
+	
+	//recogemos los padres para los inputs
 	var padre1 = document.getElementsByTagName("FORM")[0];
 	var padre2 = document.getElementsByTagName("input")[0];
 	
+	//creamos un label
 	var label = document.createElement("LABEL");
+	//le añadimos texto a ese label
 	label.appendChild(document.createTextNode("Fecha de Inicio: "));
 	
 	
+	//creamos los distintos inputs
 	var dia = crearInput();
 	var mes = crearInput();
 	var ano = crearInput();
 	
+	//le añadimos un texto para especificar cual es cual
 	dia.setAttribute("placeholder","dia");
 	mes.setAttribute("placeholder","mes");
 	ano.setAttribute("placeholder","año");
 	
 	
-	
+	//creamos un salto de linea
 	var saltoLinea = document.createElement("BR");
 	
+	//y insertamos el label y los inputs al padre
 	padre1.insertBefore(label,padre2);
 	padre1.insertBefore(dia,padre2);
 	padre1.insertBefore(mes,padre2);
 	padre1.insertBefore(ano,padre2);
+	//tambien le añadimos el salto de linea
 	padre1.insertBefore(saltoLinea,padre2);
 }
 
+//la siguiente funcion crea los inputs y el label para la fecha de cierre
 function crearFechaFinal(){
+	//recogemos los padres para los inputs
 	var padre1 = document.getElementsByTagName("FORM")[0];
 	var padre2 = document.getElementsByTagName("input")[3];
-	
+	//creamos un label
 	var label = document.createElement("LABEL");
+	//le añadimos texto a ese label
 	label.appendChild(document.createTextNode("Fecha de Cierre: "));
 	
+	//creamos los distintos inputs
 	var dia = crearInput();
 	var mes = crearInput();
 	var ano = crearInput();
 	
+	//le añadimos un texto para especificar cual es cual
 	dia.setAttribute("placeholder","dia");
 	mes.setAttribute("placeholder","mes");
 	ano.setAttribute("placeholder","año");
 	
+	//creamos un salto de linea
 	var saltoLinea = document.createElement("BR");
 	
+	//y insertamos el label y los inputs al padre
 	padre1.insertBefore(label,padre2);
 	padre1.insertBefore(dia,padre2);
 	padre1.insertBefore(mes,padre2);
 	padre1.insertBefore(ano,padre2);
+	//tambien le añadimos el salto de linea
 	padre1.insertBefore(saltoLinea,padre2);
 }
