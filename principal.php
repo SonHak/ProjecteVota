@@ -8,9 +8,12 @@
 		session_start();
 		$nombre = $_SESSION["user"];
 		
-		echo("hola, ".$nombre."<br>");
+		echo("<div id='login'>
+				hola, ".$nombre."<br>");
+		echo("<a href='logout.php'><button type='button'>Logout</button></a>
+			</div>");
 
-		echo("<a href='logout.php'><button type='button'>Logout</button></a>");
+		echo("<a href='crearConsulta.php'><button type='button'>Crear Consulta</button></a>");
 
 	?>
 </body>
