@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Temps de generació: 24-11-2017 a les 16:29:04
+-- Temps de generació: 27-11-2017 a les 19:04:55
 -- Versió del servidor: 5.7.20-0ubuntu0.16.04.1
 -- Versió de PHP: 7.0.22-0ubuntu0.16.04.1
 
@@ -19,8 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de dades: `projecteVota`
 --
-DROP DATABASE IF EXISTS `projecteVota`;
-CREATE DATABASE `projecteVota`;
+
 -- --------------------------------------------------------
 
 --
@@ -31,7 +30,8 @@ CREATE TABLE `Pregunta` (
   `ID` int(3) NOT NULL,
   `Pregunta` varchar(200) NOT NULL,
   `ID_Usuario` int(3) NOT NULL,
-  `DataInici` date NOT NULL
+  `DataInici` date NOT NULL,
+  `DataFinal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -115,7 +115,8 @@ ALTER TABLE `Respuestas`
 -- Index de la taula `Usuarios`
 --
 ALTER TABLE `Usuarios`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `Email` (`Email`);
 
 --
 -- Index de la taula `Votacion`

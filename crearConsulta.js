@@ -27,9 +27,6 @@ function crearConsulta(){
 	añadirElemento(crearLabel(),crearInput());
 	añadirElemento(crearLabel(),crearInput());
 	
-	//hacemos que el botón crear consulta quede deshabilitado
-	document.getElementById('crearConsulta').disabled = true;
-	
 	//creamos los siguientes botones
 	crearBotonRespuestas();
 	crearBotonEliminar();
@@ -51,7 +48,8 @@ function crearBotonRespuestas(){
 	//le añadimos al boton el atributo onClick
 	boton.setAttribute("onclick","crearRespuesta()");
 	//añadimos el boton a su html para que sea visible
-	document.getElementById("botones").appendChild(boton);
+	var padre = document.getElementById("botones");
+	padre.insertBefore(boton,padre.firstChild);
 }
 
 //la siguiente funcion crea el boton Eliminar Respuestas
@@ -65,7 +63,8 @@ function crearBotonEliminar(){
 	//le añadimos al boton el atributo onClick
 	boton.setAttribute("onclick","eliminarRespuestas()");
 	//añadimos el boton a su html para que sea visible
-	document.getElementById("botones").appendChild(boton);
+	var padre = document.getElementById("botones");
+	padre.insertBefore(boton,padre.firstChild);
 }
 
 //la siguiente funcion crea el boton Enviar Datos
@@ -82,8 +81,8 @@ function crearBotonEnviar(){
 	var form = document.getElementsByTagName("FORM")[0];
 	//y lo insertamos al pricipio dentro del padre
 	form.insertBefore(boton,form.firstChild);
+	form.insertBefore(input,form.firstChild);
 }
-
 
 //la siguiente funcion cambia el estilo del elemento para que sea visible
 function mostrar(elemento){
@@ -165,70 +164,25 @@ function eliminarElemento(elemento){
 	
 }
 
+
 //la siguiente funcion crea los inputs y el label para la fecha de inicio
 function crearFechaInicio(){
+	var fechaInicio = document.createElement("LABEL");
+	fechaInicio.appendChild(document.createTextNode("Fecha de Inicio"));
 	
-	//recogemos los padres para los inputs
-	var padre1 = document.getElementsByTagName("FORM")[0];
-	var padre2 = document.getElementsByTagName("input")[0];
+	var fechaInput = crearInput();
+	fechaInput.setAttribute("type","date");
+	fechaInicio.appendChild(fechaInput);
 	
-	//creamos un label
-	var label = document.createElement("LABEL");
-	//le añadimos texto a ese label
-	label.appendChild(document.createTextNode("Fecha de Inicio: "));
-	
-	
-	//creamos los distintos inputs
-	var dia = crearInput();
-	var mes = crearInput();
-	var ano = crearInput();
-	
-	//le añadimos un texto para especificar cual es cual
-	dia.setAttribute("placeholder","dia");
-	mes.setAttribute("placeholder","mes");
-	ano.setAttribute("placeholder","año");
-	
-	
-	//creamos un salto de linea
 	var saltoLinea = document.createElement("BR");
+	var padre = document.getElementsByTagName("form")[0];
+	padre.insertBefore(fechaInicio, padre.firstChild);
 	
-	//y insertamos el label y los inputs al padre
-	padre1.insertBefore(label,padre2);
-	padre1.insertBefore(dia,padre2);
-	padre1.insertBefore(mes,padre2);
-	padre1.insertBefore(ano,padre2);
-	//tambien le añadimos el salto de linea
-	padre1.insertBefore(saltoLinea,padre2);
+	
 }
 
 //la siguiente funcion crea los inputs y el label para la fecha de cierre
 function crearFechaFinal(){
-	//recogemos los padres para los inputs
-	var padre1 = document.getElementsByTagName("FORM")[0];
-	var padre2 = document.getElementsByTagName("input")[3];
-	//creamos un label
-	var label = document.createElement("LABEL");
-	//le añadimos texto a ese label
-	label.appendChild(document.createTextNode("Fecha de Cierre: "));
-	
-	//creamos los distintos inputs
-	var dia = crearInput();
-	var mes = crearInput();
-	var ano = crearInput();
-	
-	//le añadimos un texto para especificar cual es cual
-	dia.setAttribute("placeholder","dia");
-	mes.setAttribute("placeholder","mes");
-	ano.setAttribute("placeholder","año");
-	
-	//creamos un salto de linea
-	var saltoLinea = document.createElement("BR");
-	
-	//y insertamos el label y los inputs al padre
-	padre1.insertBefore(label,padre2);
-	padre1.insertBefore(dia,padre2);
-	padre1.insertBefore(mes,padre2);
-	padre1.insertBefore(ano,padre2);
-	//tambien le añadimos el salto de linea
-	padre1.insertBefore(saltoLinea,padre2);
+
 }
+
