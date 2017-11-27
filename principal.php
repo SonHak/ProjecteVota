@@ -8,8 +8,9 @@
 		session_start();
 		$nombre = $_SESSION["user"];
 		
+		echo("hola, ".$nombre."<br>");
 
-		echo ("Hola ".$nombre.", su contraseña es: ".$password);
+		echo("<a href='logout.php'><button type='button'>Logout</button></a>");
 
 	?>
 </body>

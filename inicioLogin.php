@@ -33,18 +33,26 @@
 		$id = $query->fetch();
 
 		if($id){
-			$query2 = $pdo->prepare("SELECT Password FROM Usuarios WHERE ID = ".$id[0]);
-			$query2->execute();
+			$query = $pdo->prepare("SELECT Password FROM Usuarios WHERE ID = ".$id[0]);
+			$query->execute();
 
-			$psswrd = $query2->fetch();
+			$psswrd = $query->fetch();
 			if($psswrd[0] == $_POST["password"]){
+				try {
+					$query = $pdo->prepare("SELECT Email FROM Usuarios WHERE ID = ".$id[0]);
+					$query->execute();
 
-				$query3 = $pdo->prepare("SELECT Email FROM Usuarios WHERE Email = '".$_POST["email"]."'");
-				$query->execute();
+					$intermedia = $query->fetch();
 
-				$_SESSION["user"]= $query3->fetch();;
-
-				header('Location: principal.php');
+					$_SESSION["user"] = $intermedia[0];
+					
+					header('Location: principal.php');
+				} catch (PDOException $e) {
+   					echo "Failed to get DB handle: " . $e->getMessage() . "\n";
+    				exit;
+  				}
+				// check
+			
 			}else{
 
 				 echo(' <p style="color:red; font-size:20px">Password erroneo!</p>
