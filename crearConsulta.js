@@ -194,7 +194,7 @@ function crearFechaInicio(){
 
 function crearFechaFinal(){
 	var padre1 = document.getElementsByTagName("FORM")[0];
-	var padre2 = document.getElementsByTagName("input")[1];
+	var padre2 = document.getElementsByTagName("input")[3];
 	
 	var label = document.createElement("LABEL");
 	label.appendChild(document.createTextNode("Fecha de Cierre: "));
@@ -207,9 +207,11 @@ function crearFechaFinal(){
 	mes.setAttribute("placeholder","mes");
 	ano.setAttribute("placeholder","año");
 	
+	var saltoLinea = document.createElement("BR");
+	
 	padre1.insertBefore(label,padre2);
-	padre1.insertBefore(input,padre2);
 	padre1.insertBefore(dia,padre2);
 	padre1.insertBefore(mes,padre2);
 	padre1.insertBefore(ano,padre2);
+	padre1.insertBefore(saltoLinea,padre2);
 }
