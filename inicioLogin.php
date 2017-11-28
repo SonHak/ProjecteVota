@@ -10,8 +10,9 @@
 	<header><img src="imagenes/VotaBanner.png"></header>
 	<div id="loginForm">
 	<?php
-		session_start();
-	
+		
+		session_start();                                                
+
 		include("/var/www/html/ProjecteVota/config.php");
 
 		//FORMULARIO SI EL POST ESTA VACIO
