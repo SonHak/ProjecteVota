@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<link rel="shortcut icon" href="imagenes/VotaLogo.png" />
+	<title>Principal</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
+	<header><img src="imagenes/VotaBanner.png"></header>
 	<?php
-
+	
 		include("/var/www/html/ProjecteVota/config.php");
 
 //INCLUIR EN TODOS LOS DOCUMENTOS
@@ -53,5 +56,6 @@
        echo ("</table>"); 
 
 	?>
+	<footer><img id="logo" src="imagenes/VotaLogo.png"></footer>
 </body>
 </html>

@@ -81,7 +81,7 @@ function crearBotonEnviar(){
 	var form = document.getElementsByTagName("FORM")[0];
 	//y lo insertamos al pricipio dentro del padre
 	form.insertBefore(boton,form.firstChild);
-	form.insertBefore(input,form.firstChild);
+
 }
 
 //la siguiente funcion cambia el estilo del elemento para que sea visible
@@ -120,6 +120,7 @@ function crearInput(){
 	var inputNuevo = document.createElement("INPUT");
 	//le añadimos varios atributos al input
 	inputNuevo.setAttribute("class","respuesta");
+	inputNuevo.setAttribute("onBlur","inputVacio(event)");
 	inputNuevo.setAttribute("required","true");
 	//devolvemos el nuevo input
 	return inputNuevo;
@@ -164,7 +165,14 @@ function eliminarElemento(elemento){
 	
 }
 
-
+function inputVacio(event){
+	var elemento = event.currentTarget;
+	if(elemento.value.length == 0){
+		elemento.style.boxShadow = "2px 2px red";
+	}else{
+		elemento.style.boxShadow = "none";
+	}
+}
 //la siguiente funcion crea los inputs y el label para la fecha de inicio
 function crearFechaInicio(){
 	var fechaInicio = document.createElement("LABEL");
@@ -183,6 +191,15 @@ function crearFechaInicio(){
 
 //la siguiente funcion crea los inputs y el label para la fecha de cierre
 function crearFechaFinal(){
-
+	var fechaInicio = document.createElement("LABEL");
+	fechaInicio.appendChild(document.createTextNode("Fecha de Inicio"));
+	
+	var fechaInput = crearInput();
+	fechaInput.setAttribute("type","date");
+	fechaInicio.appendChild(fechaInput);
+	
+	var saltoLinea = document.createElement("BR");
+	var padre = document.getElementsByTagName("form")[0];
+	padre.insertBefore(fechaInicio, padre.firstChild);
 }
 

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="shortcut icon" href="imagenes/VotaLogo.png" />
 	<title>login</title>
 	<link rel="stylesheet" href="style.css">
 	<script src="votaciones.js"></script> 
 </head>
 <body>
+	<header><img src="imagenes/VotaBanner.png"></header>
 	<div id="loginForm">
 	<?php
 		session_start();
@@ -82,5 +84,6 @@
 
 	?>
      </div>
+     <footer><img id="logo" src="imagenes/VotaLogo.png"></footer>
 </body>
 </html>

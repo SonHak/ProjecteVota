@@ -1,3 +1,35 @@
-#loginFrom {
+
+body{
+	text-align:center;
+	font-size: 20px;
+}
+
+#loginForm {
 	display: inline;
+	font-weight: bold;
+
+}
+
+form{
+	background-color: rgb(204, 204, 204);
+	border-radius: 4px;
+	width: 300px;
+	margin: 0 auto;
+}
+img#logo{
+	height: 150px;
+	width: 250px;
+	
+}
+div#botones{
+	margin: 0 auto;
+	padding: 15px;
+	width: 500px;
+}
+form#respuestas{
+	width: 390px;
+}
+
+textarea{
+	margin: 0 auto;
 }
