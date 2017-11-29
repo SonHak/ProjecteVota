@@ -8,8 +8,11 @@
 <body>
 	<header><img src="imagenes/VotaBanner.png"></header>
 	<?php
-	
-		include("/var/www/html/ProjecteVota/config.php");
+
+
+	include("/var/www/html/ProjecteVota/config.php");
+
+
 
 //INCLUIR EN TODOS LOS DOCUMENTOS
 		session_start();
@@ -37,16 +40,16 @@
 
 		while($pregunta){
 
-				echo ("<form action='votar.php' method='post' >");
+				echo ("<form action='votar.php' method='post'>");
 				echo ("<tr >");
-					echo ("<td><input type='text' value='".$pregunta['Pregunta']."' readonly></td>");
-			    	echo ("<td><input type='text' value='".$pregunta['DataInici']."' readonly></td>");
-			    	echo ("<td><input type='text' value='".$pregunta['DataFinal']."' readonly></td>");
+					echo ("<td><input type='text' name='pregunta' value='".$pregunta['Pregunta']."' readonly></td>");
+			    	echo ("<td><input type='text' name='dInicio' value='".$pregunta['DataInici']."' readonly></td>");
+			    	echo ("<td><input type='text' name='dFinal' value='".$pregunta['DataFinal']."' readonly></td>");
 
 			        echo ("<td><input value='VOTA' type='submit' id='VOTA' /></td>");
 
-			        echo ("<td><input type='text' value='".$pregunta['ID']."' readonly hidden></td>");
-			    	echo ("<td><input type='text' value='".$pregunta['ID_Usuario']."' readonly hidden></td>");
+			        echo ("<td><input type='text' name='id' value='".$pregunta['ID']."' readonly hidden></td>");
+			    	echo ("<td><input type='text' name='uId' value='".$pregunta['ID_Usuario']."' readonly hidden></td>");
 
 			    echo ("</tr>");
 			    echo ("</form>");

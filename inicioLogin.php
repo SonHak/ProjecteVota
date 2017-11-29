@@ -13,7 +13,9 @@
 		
 		session_start();                                                
 
-		include("/var/www/html/ProjecteVota/config.php");
+
+	include("/var/www/html/ProjecteVota/config.php");
+
 
 		//FORMULARIO SI EL POST ESTA VACIO
 	if(!isset($_POST["email"])){	

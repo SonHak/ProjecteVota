@@ -9,7 +9,9 @@
 		<header><img src="imagenes/VotaBanner.png"></header>
 		<div id="botones">
 		<?php
-		include("/var/www/html/ProjecteVota/config.php");
+
+	include("/var/www/html/ProjecteVota/config.php");
+
 
 	//INCLUIR EN TODOS LOS DOCUMENTOS
 			session_start();

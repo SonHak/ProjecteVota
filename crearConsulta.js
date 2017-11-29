@@ -150,7 +150,7 @@ function eliminarRespuestas(){
 	var arrayDivs = document.getElementsByTagName("DIV");
 	
 	//por cada div que encuentre ejecutara una funcion (excepto para el DIV con ID "1" y el DIV con ID "2")
-	for(var i = arrayDivs.length; i > 4 ; i--){
+	for(var i = arrayDivs.length; i > 3 ; i--){
 			eliminarElemento(arrayDivs[i-1]);
 	}
 	//devolvemos la variable global cantidadRespuestas a 3

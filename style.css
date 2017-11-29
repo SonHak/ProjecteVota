@@ -15,6 +15,14 @@ body{
 	border-radius: 4px;
 	width: 300px;
 	margin: 0 auto;
+	position: absolute;
+	float: right;
+	vertical-align: top; 
+	margin: 20px;
+	top: 20px;
+	right: 50px;
+	border: solid 2px #888;
+
 }
 form{
 	background-color: rgb(204, 204, 204);
@@ -38,4 +46,9 @@ form#respuestas{
 
 textarea{
 	margin: 0 auto;
+}
+
+
+.fechas{
+	display: block;
 }
