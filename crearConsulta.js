@@ -180,6 +180,7 @@ function crearFechaInicio(){
 	
 	var fechaInput = crearInput();
 	fechaInput.setAttribute("type","date");
+	fechaInput.setAttribute("name","fechaInicio");
 	fechaInicio.appendChild(fechaInput);
 	
 	var saltoLinea = document.createElement("BR");
@@ -196,6 +197,7 @@ function crearFechaFinal(){
 	
 	var fechaInput = crearInput();
 	fechaInput.setAttribute("type","date");
+	fechaInput.setAttribute("name","fechaFinal");
 	fechaInicio.appendChild(fechaInput);
 	
 	var saltoLinea = document.createElement("BR");

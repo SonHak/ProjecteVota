@@ -20,9 +20,11 @@
 			echo("<a href='logout.php'><button type='button'>Logout</button></a>
 				</div>");
 				
+			
+			echo "<form method='POST' action='enviarDatos.php' id='respuestas'>";
 			echo "<label id='primero' for='consulta' class='consulta'>Crea la teva consulta:</label></br> \n";
-			echo "<textarea cols='40' rows='10' class='consulta'/> </textarea> \n";
-			echo "<form method='GET' action='principal.php' id='respuestas'></form>";
+			echo "<textarea cols='40' rows='10' name='pregunta' class='consulta'/> </textarea> \n";
+			echo "</form>";
 		?>
 		</div>
 	<footer><img id="logo" src="imagenes/VotaLogo.png"></footer>

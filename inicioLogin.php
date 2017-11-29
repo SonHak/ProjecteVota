@@ -22,7 +22,7 @@
 			<p>EMAIL: <input type="text" name="email" required="true"></p>
 	    	<p>Password: <input type="password" name="password" required="true"></p>
 
-	        <input value="Login" type="submit" id="login" />
+	        <input value="Login" type="submit" id="inicio" />
 	     </form>');
 
 	 	//SI EL FORMULARIO ESTA RELLENO HACE UNA QUERY PARA RECOGER EL ID COMPROBANDO EL EMAIL
@@ -63,7 +63,7 @@
 					<p>EMAIL: <input type="text" name="email" required="true"></p>
 			    	<p>Password: <input type="password" name="password" required="true"></p>
 
-			        <input value="Login" type="submit" id="login" />
+			        <input value="Login" type="submit" id="inicio" />
 			     </form>');
 
 			}
@@ -76,7 +76,7 @@
 					<p>EMAIL: <input type="text" name="email" required="true"></p>
 			    	<p>Password: <input type="password" name="password" required="true"></p>
 
-			        <input value="Login" type="submit" id="login" />
+			        <input value="Login" type="submit" id="inicio" />
 			     </form>');
 		}
 		
