@@ -30,7 +30,7 @@
 	$query->execute(array($pregunta,$id[0],$dInicio,$dFinal));
 	
 	
-	$query = $pdo->prepare("SELECT ID FROM Pregunta WHERE ID_Usuario = ".$id[0]);
+	$query = $pdo->prepare("SELECT MAX(ID) FROM Pregunta WHERE ID_Usuario = ".$id[0]);
 	$query->execute();
 	$idPregunta = $query->fetch();
 	echo $idPregunta[0];

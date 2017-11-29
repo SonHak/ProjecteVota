@@ -33,8 +33,9 @@ function crearConsulta(){
 	crearBotonEnviar()
 	
 	//creamos los inputs y labels para las fechas
-	crearFechaInicio();
 	crearFechaFinal();
+	crearFechaInicio();
+	
 }
 
 //la siguiente funcion crea el boton Crear Respuestas
@@ -150,7 +151,7 @@ function eliminarRespuestas(){
 	var arrayDivs = document.getElementsByTagName("DIV");
 	
 	//por cada div que encuentre ejecutara una funcion (excepto para el DIV con ID "1" y el DIV con ID "2")
-	for(var i = arrayDivs.length; i > 3 ; i--){
+	for(var i = arrayDivs.length; i > 6 ; i--){
 			eliminarElemento(arrayDivs[i-1]);
 	}
 	//devolvemos la variable global cantidadRespuestas a 3
@@ -184,26 +185,30 @@ function crearFechaInicio(){
 	fechaInput.setAttribute("name","fechaInicio");
 	fechaInicio.appendChild(fechaInput);
 	
-	var saltoLinea = document.createElement("BR");
+	var divPadre = document.createElement("DIV");
+	divPadre.appendChild(fechaInicio);
+	
 	var padre = document.getElementsByTagName("form")[0];
-	padre.insertBefore(fechaInicio, padre.firstChild);
+	padre.insertBefore(divPadre, padre.firstChild);
 	
 	
 }
 
 //la siguiente funcion crea los inputs y el label para la fecha de cierre
 function crearFechaFinal(){
-	var fechaInicio = document.createElement("LABEL");
-	fechaInicio.appendChild(document.createTextNode("Fecha de Inicio"));
+	var fechaFinal = document.createElement("LABEL");
+	fechaFinal.appendChild(document.createTextNode("Fecha de Final"));
 	
 	var fechaInput = document.createElement("INPUT");
 	fechaInput.setAttribute("required","true");
 	fechaInput.setAttribute("type","date");
 	fechaInput.setAttribute("name","fechaFinal");
-	fechaInicio.appendChild(fechaInput);
+	fechaFinal.appendChild(fechaInput);
 	
-	var saltoLinea = document.createElement("BR");
+	var divPadre = document.createElement("DIV");
+	divPadre.appendChild(fechaFinal);
+	
 	var padre = document.getElementsByTagName("form")[0];
-	padre.insertBefore(fechaInicio, padre.firstChild);
+	padre.insertBefore(divPadre, padre.firstChild);
 }
 
