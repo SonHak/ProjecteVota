@@ -49,9 +49,9 @@
 	
 
 				echo ("<form action='votar.php' method='post'>");
-					echo ("<div id='resp'>");
+					echo ("<div class='resp'>");
 
-					echo ("<input type='text' name='pregunta' value='".$respuesta2."' readonly></td>");
+					echo ("<input type='text' name='res' value='".$respuesta2."' readonly></td>");
 					echo("<input type='text' name='idPregunta' value='".$idPregunta."' readonly hidden>");
 			        echo ("<input value='VOTA' type='submit' id='VOTA' />");
 
@@ -71,13 +71,13 @@
 			$contestada = $query->fetch();
 
 			if ($contestada) {
-				$query = $pdo->prepare("DELETE FROM relacionusuariovota WHERE ID_Usuario = '".$id[0]."'");
+				$query = $pdo->prepare("DELETE FROM relacionusuariovota WHERE ID_Usuario = '".$id[0]."' AND ID_Pregunta =".$_POST["idPregunta"]);
 				$query->execute();
 
 
 				$query = $pdo->prepare("INSERT INTO relacionusuariovota(ID_Usuario,Votacion,ID_Pregunta) 
 										VALUES (?, ?, ?)");
-				$selected_val = $_POST['radioRes'];
+				$selected_val = $_POST['res'];
 				$query->execute(array($id[0], $selected_val, $_POST['idPregunta']));
 				echo ("Respuesta modificada con exito!");
 
@@ -85,7 +85,7 @@
 			}else{
 				$query = $pdo->prepare("INSERT INTO relacionusuariovota(ID_Usuario,Votacion,ID_Pregunta) 
 										VALUES (?, ?, ?)");
-				$selected_val = $_POST['radioRes'];
+				$selected_val = $_POST['res'];
 				$query->execute(array($id[0], $selected_val, $_POST['idPregunta']));
 				echo ("Respuesta guardada con exito!");
 			}
