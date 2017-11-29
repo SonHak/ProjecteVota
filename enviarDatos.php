@@ -21,16 +21,16 @@
 	
 
 	
-	
+	echo $pregunta,$id[0],$dInicio,$dFinal;
 	$query = $pdo->prepare("INSERT INTO Pregunta(Pregunta,ID_Usuario,DataInici,DataFinal) 
 							VALUES (?, ?, ?, ?)");
 	$query->execute(array($pregunta,$id[0],$dInicio,$dFinal));
 	
 	
-	$query = $pdo->prepare("SELECT ID FROM Pregunta WHERE ID_Usuario = ".$id[0]);
+	$query = $pdo->prepare("SELECT MAX(ID) FROM Pregunta WHERE ID_Usuario = ".$id[0]);
 	$query->execute();
 	$idPregunta = $query->fetch();
-	echo $idPregunta[0];
+	
 	
 	$query = $pdo->prepare("INSERT INTO Respuestas(ID_Pregunta,Respuesta) 
 						VALUES (?, ?)");
@@ -41,10 +41,10 @@
 	
 	for($i=0;$i <= $maxSize;$i++){
 		$query->execute(array($idPregunta[0],$arrayRespuestas[0][$i]));
-
+		echo $idPregunta[0].$arrayRespuestas[0][$i];
 	}
 	
 	
-	header('Location: principal.php');
+	//header('Location: principal.php');
 	
 ?>
