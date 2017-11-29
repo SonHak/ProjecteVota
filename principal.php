@@ -37,7 +37,7 @@
 
 		while($pregunta){
 
-				echo ("<form action='vota.php' method='post' >");
+				echo ("<form action='votar.php' method='post' >");
 				echo ("<tr >");
 					echo ("<td><input type='text' value='".$pregunta['Pregunta']."' readonly></td>");
 			    	echo ("<td><input type='text' value='".$pregunta['DataInici']."' readonly></td>");

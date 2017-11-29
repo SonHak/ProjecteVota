@@ -119,7 +119,7 @@ function crearInput(){
 	//creamos el elemento y lo guardamos en una variable
 	var inputNuevo = document.createElement("INPUT");
 	//le añadimos varios atributos al input
-	inputNuevo.setAttribute("class","respuesta");
+	inputNuevo.setAttribute("name","respuesta[]");
 	inputNuevo.setAttribute("onBlur","inputVacio(event)");
 	inputNuevo.setAttribute("required","true");
 	//devolvemos el nuevo input
@@ -178,7 +178,8 @@ function crearFechaInicio(){
 	var fechaInicio = document.createElement("LABEL");
 	fechaInicio.appendChild(document.createTextNode("Fecha de Inicio"));
 	
-	var fechaInput = crearInput();
+	var fechaInput = document.createElement("INPUT");
+	fechaInput.setAttribute("required","true");
 	fechaInput.setAttribute("type","date");
 	fechaInput.setAttribute("name","fechaInicio");
 	fechaInicio.appendChild(fechaInput);
@@ -195,7 +196,8 @@ function crearFechaFinal(){
 	var fechaInicio = document.createElement("LABEL");
 	fechaInicio.appendChild(document.createTextNode("Fecha de Inicio"));
 	
-	var fechaInput = crearInput();
+	var fechaInput = document.createElement("INPUT");
+	fechaInput.setAttribute("required","true");
 	fechaInput.setAttribute("type","date");
 	fechaInput.setAttribute("name","fechaFinal");
 	fechaInicio.appendChild(fechaInput);
