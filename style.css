@@ -83,6 +83,10 @@ textarea{
 	margin: 0 auto;
 }
 
+.resp{
+	float: left;
+	display: inline;
+}
 
 .fechas{
 	display: block;

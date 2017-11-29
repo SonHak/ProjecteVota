@@ -43,21 +43,24 @@
 			echo("	<h5>".$dFinal."</h5>
 				</div>");
 
-			echo ("<form action='votar.php' method='post' >");
-			echo ("<select name='radioRes'>");
+			
 			while($respuesta){
 				$respuesta2 = $respuesta['Respuesta'];
-				
-				echo ("<option value='".$respuesta2."'\>");
-				echo($respuesta2);
+	
+
+				echo ("<form action='votar.php' method='post'>");
+					echo ("<div id='resp'>");
+
+					echo ("<input type='text' name='pregunta' value='".$respuesta2."' readonly></td>");
+					echo("<input type='text' name='idPregunta' value='".$idPregunta."' readonly hidden>");
+			        echo ("<input value='VOTA' type='submit' id='VOTA' />");
+
+					echo ("</div>");
+			    echo ("</form>");
+
 				$respuesta = $query->fetch();
 			}
 
-			echo ("<input value='VOTA' type='submit' name=res id='VOTA' />");
-			echo ("</select>");
-
-			echo("<input type='text' name='idPregunta' value='".$idPregunta."' readonly hidden>");
-			echo ("</form>");
 		}else{
 			$query = $pdo->prepare("SELECT ID FROM Usuarios WHERE Email = '".$nombre."'");
 			$query->execute();
