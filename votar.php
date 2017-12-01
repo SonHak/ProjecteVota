@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script type="text/javascript" src="votar.js"></script>
 	<link rel="shortcut icon" href="imagenes/VotaLogo.png" />
 	<title>Vota</title>
 	<link rel="stylesheet" href="style.css">
 </head>
-<body>
-	<header><img src="imagenes/VotaBanner.png"></header>
+<body onload="efecto()">
+	<header ><img src="imagenes/VotaBanner.png"></header>
 	<?php
 	
 
@@ -38,26 +39,27 @@
 			
 			echo("<h3>".$pregunta."</h3>");
 
-			echo("<div class='fechas'>
-					<h5>".$dInicio."</h5>");
-			echo("	<h5>".$dFinal."</h5>
+			echo("<div >
+					<h5 class='fechas'>".$dInicio."</h5>");
+			echo("	<h5 class='fechas'>".$dFinal."</h5>
 				</div>");
 
-			
+			$cont=0;
 			while($respuesta){
 				$respuesta2 = $respuesta['Respuesta'];
 	
-
+					echo ("<div class='resp'");
 				echo ("<form action='votar.php' method='post'>");
-					echo ("<div class='resp'>");
+					
 
-					echo ("<input type='text' name='res' value='".$respuesta2."' readonly></td>");
-					echo("<input type='text' name='idPregunta' value='".$idPregunta."' readonly hidden>");
-			        echo ("<input value='VOTA' type='submit' id='VOTA' />");
+					echo ("<div class='respuestas' id ='vota".$cont."'> <input type='text' name='res' value='".$respuesta2."' readonly/>");
+					echo("<input type='text' name='idPregunta' value='".$idPregunta."' readonly hidden/>");
+			        echo ("<input value='VOTA' type='submit' id='VOTA' /> </div>");
 
-					echo ("</div>");
+					
 			    echo ("</form>");
-
+			    echo ("</div>");
+			    $cont++;
 				$respuesta = $query->fetch();
 			}
 
