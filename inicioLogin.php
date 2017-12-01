@@ -20,7 +20,7 @@
 		//FORMULARIO SI EL POST ESTA VACIO
 	if(!isset($_POST["email"])){	
 
-	 echo('<form action="inicioLogin.php" method="post" >
+	 echo('<form action="inicioLogin.php" method="post" id="inicio">
 			<p>EMAIL: <input type="text" name="email" required="true"></p>
 	    	<p>Password: <input type="password" name="password" required="true"></p>
 
@@ -61,7 +61,7 @@
 
 				 echo(' <p style="color:red; font-size:20px">Password erroneo!</p>
 				 	<br>
-				 	<form action="inicioLogin.php" method="post" >
+				 	<form action="inicioLogin.php" method="post" id="inicio">
 					<p>EMAIL: <input type="text" name="email" required="true"></p>
 			    	<p>Password: <input type="password" name="password" required="true"></p>
 
@@ -74,7 +74,7 @@
 		} else {
 			echo(' <p style="color:red; font-size:20px">Email no encontrado!</p>
 				<br>
-				<form action="inicioLogin.php" method="post" >
+				<form action="inicioLogin.php" method="post" id="inicio">
 					<p>EMAIL: <input type="text" name="email" required="true"></p>
 			    	<p>Password: <input type="password" name="password" required="true"></p>
 
