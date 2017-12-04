@@ -8,6 +8,10 @@
 </head>
 <body id='cuerpo' onload="efecto()">
 	<header ><img src="imagenes/VotaBanner.png"></header>
+	
+		<a href='principal.php'><img id='home' src='imagenes/home.png'></a>
+
+
 	<?php
 	
 
@@ -17,10 +21,6 @@
 //INCLUIR EN TODOS LOS DOCUMENTOS
 		session_start();
 		$nombre = $_SESSION["user"];
-		
-		echo("<div id='pPrincipal'>");
-		echo("<a href='principal.php'><img id='home' src='imagenes/home.png'></a>
-			</div>");
 
 
 		echo("<div id='login'>

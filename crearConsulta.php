@@ -7,6 +7,9 @@
 	</head>
 	<body onload="crearConsulta()">
 		<header><img src="imagenes/VotaBanner.png"></header>
+		
+		<a href='principal.php'><img id='home' src='imagenes/home.png'></a>
+
 		<div id="botones">
 		<?php
 
