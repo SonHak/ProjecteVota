@@ -1,5 +1,7 @@
 //Variable global que cuenta cuantas respuestas (inputs) hay
 var cantidadRespuestas = 1;
+
+//Variables globales para la efcha actual
 var hoy = new Date();
 var dia = hoy.getDate();
 var mes = hoy.getMonth()+1;
@@ -243,10 +245,13 @@ function fechaMax(event){
 	}
 	
 }
+
+//genera el input y label con fecha final despues de perder el foco en el primer 
 function generarFechaFinal(){
 	var fechaInicio = document.querySelector("input[name='fechaInicio']");
 	var fechaFinal = document.querySelector("input[name='fechaFinal']");
-	if(fechaFinal == null){
+	
+	if(fechaFinal == null && fechaInicio.value != ""){
 		crearFechaFinal(fechaInicio.value);
 	}	
 }
