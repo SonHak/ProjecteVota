@@ -177,7 +177,7 @@ function eliminarElemento(elemento){
 function inputVacio(event){
 	var elemento = event.currentTarget;
 	if(elemento.value.length == 0){
-		elemento.style.boxShadow = "2px 2px red";
+		elemento.style.boxShadow = "-1px 1px 20px red";
 	}else{
 		elemento.style.boxShadow = "none";
 	}
@@ -239,7 +239,7 @@ function fechaMax(event){
 	fechaFinal.setAttribute("min",fechaInicio.value)
 	if(fechaFinal.value < fechaInicio.value || fechaFinal.value == fechaInicio.value){
 		fechaFinal.focus();
-		fechaFinal.style.boxShadow = "1px 1px 1px 1px orange";
+		fechaFinal.style.boxShadow = "-1px 1px 20px orange";
 	}else{
 		fechaFinal.style.boxShadow = "none";
 	}
