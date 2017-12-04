@@ -6,7 +6,7 @@
 	<title>Vota</title>
 	<link rel="stylesheet" href="style.css">
 </head>
-<body onload="efecto()">
+<body id='cuerpo' onload="efecto()">
 	<header ><img src="imagenes/VotaBanner.png"></header>
 	<?php
 	
@@ -18,6 +18,11 @@
 		session_start();
 		$nombre = $_SESSION["user"];
 		
+		echo("<div id='pPrincipal'>");
+		echo("<a href='principal.php'><img id='home' src='imagenes/home.png'></a>
+			</div>");
+
+
 		echo("<div id='login'>
 				hola, ".$nombre."<br>");
 		echo("<a href='logout.php'><button type='button'>Logout</button></a>
@@ -45,23 +50,27 @@
 				</div>");
 
 			$cont=0;
-			while($respuesta){
-				$respuesta2 = $respuesta['Respuesta'];
-	
-					echo ("<div class='resp'");
-				echo ("<form action='votar.php' method='post'>");
-					
 
-					echo ("<div class='respuestas' id ='vota".$cont."'> <input type='text' name='res' value='".$respuesta2."' readonly/>");
-					echo("<input type='text' name='idPregunta' value='".$idPregunta."' readonly hidden/>");
-			        echo ("<input value='VOTA' type='submit' id='VOTA' /> </div>");
+			echo ("<div id='resp'>");
+				while($respuesta){
+					$respuesta2 = $respuesta['Respuesta'];
+		
+						echo ("<div class='formu' id='formu".$cont."'>");
+					echo ("<form action='votar.php' method='post' >");
+						
 
-					
-			    echo ("</form>");
-			    echo ("</div>");
-			    $cont++;
-				$respuesta = $query->fetch();
-			}
+						echo ("<div class='respuestas' id ='vota".$cont."'> <input type='text' name='res' value='".$respuesta2."' readonly/>");
+						echo("<input type='text' name='idPregunta' value='".$idPregunta."' readonly hidden/>");
+				        echo ("<input value='VOTA' type='submit' id='VOTA' /> </div>");
+
+						
+				    echo ("</form>");
+				   
+				    $cont++;
+					$respuesta = $query->fetch();
+					echo ("</div>");
+				}
+			echo ("</div>");
 
 		}else{
 			$query = $pdo->prepare("SELECT ID FROM Usuarios WHERE Email = '".$nombre."'");

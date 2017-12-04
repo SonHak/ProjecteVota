@@ -1,11 +1,22 @@
 function efecto(){
-	var respuestas =  document.getElementsByClassName('resp');
+	var respuestas = document.getElementsByClassName("formu");
+	 for (var i = 0; i < respuestas.length ; i++) {
+	 	var respuesta = document.getElementById("vota"+i);
+	 	
+	 	animacion(respuesta);
+	 }
+}
 
-	for (var i = 0; i < respuestas.length; i++) {
-				var tiempo = setTimeout(function(){
-					document.getElementById("vota"+i).setAttribute('class','respuestas2');
-					console.log("vota "+i);
-
-				}, 2000);
-	}
+function animacion(elemento) { 
+  var pos = -700;
+  var id = setInterval(frame, 15);
+  function frame() {
+    if (pos == 250) {
+      clearInterval(id);
+    } else {
+      pos=pos+5;  
+      console.log(elemento); 
+      elemento.style.left = pos + 'px'; 
+    }
+  }
 }
