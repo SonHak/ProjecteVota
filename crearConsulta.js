@@ -1,8 +1,13 @@
 //Variable global que cuenta cuantas respuestas (inputs) hay
 var cantidadRespuestas = 1;
+var hoy = new Date();
+var dia = hoy.getDate();
+var mes = hoy.getMonth()+1;
+var ano = hoy.getFullYear();
+var fechaMax;
 
 function crearConsulta(){
-	
+
 	//recogemos los labels, el textarea y los inputs y los guardamos en variables
 	var label = document.getElementsByTagName("label");
 	var pregunta = document.getElementsByTagName("textarea");
@@ -33,8 +38,9 @@ function crearConsulta(){
 	crearBotonEnviar()
 	
 	//creamos los inputs y labels para las fechas
-	crearFechaFinal();
 	crearFechaInicio();
+	
+
 	
 }
 
@@ -178,11 +184,21 @@ function inputVacio(event){
 function crearFechaInicio(){
 	var fechaInicio = document.createElement("LABEL");
 	fechaInicio.appendChild(document.createTextNode("Fecha de Inicio"));
+	dia ++;
+	if(dia < 10 ){
+		dia = "0"+dia;
+	}
+	if(mes < 10){
+		mes = "0"+mes;
+	}
+	var fecha = ano+"-"+mes+"-"+(dia);
 	
 	var fechaInput = document.createElement("INPUT");
-	fechaInput.setAttribute("required","true");
 	fechaInput.setAttribute("type","date");
 	fechaInput.setAttribute("name","fechaInicio");
+	fechaInput.setAttribute("min",fecha);
+	fechaInput.setAttribute("onblur","generarFechaFinal()");
+	fechaInput.setAttribute("required","true");
 	fechaInicio.appendChild(fechaInput);
 	
 	var divPadre = document.createElement("DIV");
@@ -195,20 +211,42 @@ function crearFechaInicio(){
 }
 
 //la siguiente funcion crea los inputs y el label para la fecha de cierre
-function crearFechaFinal(){
+function crearFechaFinal(value){
 	var fechaFinal = document.createElement("LABEL");
 	fechaFinal.appendChild(document.createTextNode("Fecha de Final"));
+
 	
 	var fechaInput = document.createElement("INPUT");
 	fechaInput.setAttribute("required","true");
 	fechaInput.setAttribute("type","date");
+	fechaInput.setAttribute("onblur","fechaMax(event)");
 	fechaInput.setAttribute("name","fechaFinal");
+	fechaInput.setAttribute("min",value);
 	fechaFinal.appendChild(fechaInput);
 	
 	var divPadre = document.createElement("DIV");
 	divPadre.appendChild(fechaFinal);
 	
 	var padre = document.getElementsByTagName("form")[0];
-	padre.insertBefore(divPadre, padre.firstChild);
+	padre.firstChild.appendChild(divPadre);
 }
 
+function fechaMax(event){
+	var fechaFinal = event.currentTarget;
+	var fechaInicio = document.querySelector("input[name='fechaInicio']");
+	fechaFinal.setAttribute("min",fechaInicio.value)
+	if(fechaFinal.value < fechaInicio.value || fechaFinal.value == fechaInicio.value){
+		fechaFinal.focus();
+		fechaFinal.style.boxShadow = "1px 1px 1px 1px orange";
+	}else{
+		fechaFinal.style.boxShadow = "none";
+	}
+	
+}
+function generarFechaFinal(){
+	var fechaInicio = document.querySelector("input[name='fechaInicio']");
+	var fechaFinal = document.querySelector("input[name='fechaFinal']");
+	if(fechaFinal == null){
+		crearFechaFinal(fechaInicio.value);
+	}	
+}
