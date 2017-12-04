@@ -120,3 +120,19 @@ div.resp {
 div.respuestas2 {
     left:48px;
 }
+
+
+#resp {
+  width: 800px;
+  height: 300px;
+  left: 17%;
+  position: relative;
+}
+
+.respuestas {
+  width: 350px;
+  height: 30px;
+  position: relative;
+}
+
+
