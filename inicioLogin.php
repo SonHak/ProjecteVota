@@ -50,7 +50,7 @@
 
 					$_SESSION["user"] = $intermedia[0];
 					
-					header('Location: principal.php');
+					header('Location: principalUser.php');
 				} catch (PDOException $e) {
    					echo "Failed to get DB handle: " . $e->getMessage() . "\n";
     				exit;

@@ -102,7 +102,7 @@ textarea{
   position: relative;
 }
 
-.respuestas {
+#respuestas {
   width: 350px;
   height: 30px;
   position: relative;
