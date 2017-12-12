@@ -49,6 +49,7 @@
 					$intermedia = $query->fetch();
 
 					$_SESSION["user"] = $intermedia[0];
+				//IF
 					
 					header('Location: principalUser.php');
 				} catch (PDOException $e) {
