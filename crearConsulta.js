@@ -41,7 +41,7 @@ function crearConsulta(){
 	
 	//creamos los inputs y labels para las fechas
 	crearFechaInicio();
-	
+	crearFechaFinal();
 
 	
 }
@@ -117,8 +117,7 @@ function crearLabel(){
 	//añadimos dicho texto al nuevo label
 	labelNuevo.appendChild(textoNuevo);
 	
-	//sumamos 1 a la variable global cantidadRespuestas 
-	cantidadRespuestas++;
+
 	//devolvemos el nuevo label
 	return labelNuevo;
 	
@@ -139,27 +138,43 @@ function crearInput(){
 function añadirElemento(elemento1,elemento2){	
 	//guardamos en una variable el padre donde se van a crear el nuevo Label y el nuevo Input
 	var padre = document.createElement("DIV");
-	//le añadimos al padre un atributo id
-	padre.setAttribute("id",cantidadRespuestas-1);
 	
-	//añadimos los dos elementos (tanto el nuevo label como el nuevo input) al padre
-	padre.appendChild(elemento1);
-	padre.appendChild(elemento2);
-
+	
+	var botonEliminar = document.createElement("BUTTON");
+	botonEliminar.setAttribute("onclick","eliminarRespuestaUnica(event)");
+	botonEliminar.appendChild(document.createTextNode("X")); 
+	//le añadimos al padre un atributo id
+	padre.setAttribute("id",cantidadRespuestas);
+	if(padre.id == 1 || padre.id == 2){
+		padre.appendChild(elemento1);
+		padre.appendChild(elemento2);
+	}else{
+		padre.appendChild(elemento1);
+		padre.appendChild(elemento2);
+		padre.appendChild(botonEliminar);
+	}
+	padre.setAttribute("class","respuestas");
+	
+	
+	//sumamos 1 a la variable global cantidadRespuestas 
+	cantidadRespuestas++;
+	
+	
 	//por ultimo guardamos en una variable el padre general de cada div
 	var form = document.getElementsByTagName("FORM")[0];
 	//y se lo añadimos
 	form.appendChild(padre);
+	
 
 }
 
 function eliminarRespuestas(){
 	
 	//recorremos todos los divs que tenemos en el documento
-	var arrayDivs = document.getElementsByTagName("DIV");
+	var arrayDivs = document.querySelectorAll("div [class='respuestas']");
 	
 	//por cada div que encuentre ejecutara una funcion (excepto para el DIV con ID "1" y el DIV con ID "2")
-	for(var i = arrayDivs.length; i > 6 ; i--){
+	for(var i = arrayDivs.length; i > 2 ; i--){
 			eliminarElemento(arrayDivs[i-1]);
 	}
 	//devolvemos la variable global cantidadRespuestas a 3
@@ -199,7 +214,7 @@ function crearFechaInicio(){
 	fechaInput.setAttribute("type","date");
 	fechaInput.setAttribute("name","fechaInicio");
 	fechaInput.setAttribute("min",fecha);
-	fechaInput.setAttribute("onblur","generarFechaFinal()");
+	fechaInput.setAttribute("onblur","fechaMax(event)");
 	fechaInput.setAttribute("required","true");
 	fechaInicio.appendChild(fechaInput);
 	
@@ -213,7 +228,7 @@ function crearFechaInicio(){
 }
 
 //la siguiente funcion crea los inputs y el label para la fecha de cierre
-function crearFechaFinal(value){
+function crearFechaFinal(){
 	var fechaFinal = document.createElement("LABEL");
 	fechaFinal.appendChild(document.createTextNode("Fecha de Final"));
 
@@ -221,9 +236,8 @@ function crearFechaFinal(value){
 	var fechaInput = document.createElement("INPUT");
 	fechaInput.setAttribute("required","true");
 	fechaInput.setAttribute("type","date");
-	fechaInput.setAttribute("onblur","fechaMax(event)");
 	fechaInput.setAttribute("name","fechaFinal");
-	fechaInput.setAttribute("min",value);
+
 	fechaFinal.appendChild(fechaInput);
 	
 	var divPadre = document.createElement("DIV");
@@ -233,11 +247,11 @@ function crearFechaFinal(value){
 	padre.firstChild.appendChild(divPadre);
 }
 
-function fechaMax(event){
-	var fechaFinal = event.currentTarget;
+function fechaMax(){
+	var fechaFinal = document.querySelector("input[name='fechaFinal']");
 	var fechaInicio = document.querySelector("input[name='fechaInicio']");
 	fechaFinal.setAttribute("min",fechaInicio.value)
-	if(fechaFinal.value < fechaInicio.value || fechaFinal.value == fechaInicio.value){
+	if(fechaFinal.value < fechaInicio.value && fechaFinal.value == fechaInicio.value){
 		fechaFinal.focus();
 		fechaFinal.style.boxShadow = "-1px 1px 20px orange";
 	}else{
@@ -246,12 +260,18 @@ function fechaMax(event){
 	
 }
 
-//genera el input y label con fecha final despues de perder el foco en el primer 
-function generarFechaFinal(){
-	var fechaInicio = document.querySelector("input[name='fechaInicio']");
-	var fechaFinal = document.querySelector("input[name='fechaFinal']");
+function eliminarRespuestaUnica(event){
+	var padre = document.getElementsByTagName("form")[0];
 	
-	if(fechaFinal == null && fechaInicio.value != ""){
-		crearFechaFinal(fechaInicio.value);
-	}	
-}
+	var padreDiv = event.currentTarget.parentNode;
+	//var id = parseInt(padreDiv.id);
+	
+	padre.removeChild(padreDiv);
+	
+	var hermanosArray = padre.querySelectorAll("div [class='respuestas']");
+	
+	eliminarRespuestas();
+	for(var i = 2; i < hermanosArray.length; i++){
+			añadirElemento(crearLabel(),crearInput());
+	}
+}	

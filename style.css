@@ -76,7 +76,7 @@ div#botones{
 	width: 500px;
 }
 form#respuestas{
-	width: 390px;
+	width: 500px;
 }
 
 textarea{
@@ -102,11 +102,6 @@ textarea{
   position: relative;
 }
 
-#respuestas {
-  width: 350px;
-  height: 30px;
-  position: relative;
-}
 
 img#home{
 	height: 80px;
