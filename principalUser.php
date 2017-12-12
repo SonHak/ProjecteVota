@@ -33,7 +33,7 @@
 
 		echo("<a href='crearConsulta.php'><button type='button'>Crear Consulta</button></a>");
 
-
+//PREGUNTAS REALIZADAS
 		//$query = $pdo->prepare("SELECT * FROM Pregunta");
 		$queryRealizadas = $pdo->prepare("SELECT * FROM relacionusuariovota join Pregunta on (Pregunta.ID = relacionusuariovota.ID_Pregunta) WHERE relacionusuariovota.ID_Usuario =".$id['ID']);
 		$queryRealizadas->execute();
@@ -41,17 +41,17 @@
 		$preguntasRealizadas = $queryRealizadas->fetch();
 
 
-		$queryPendientes = $pdo->prepare("SELECT Pregunta, DataInici, DataFinal, ID, ID_Usuario FROM relacionusuariovota join Pregunta on (Pregunta.ID = relacionusuariovota.ID_Pregunta) WHERE NOT relacionusuariovota.ID_Usuario =".$id['ID']);
+//PREGUNTAS PENDIENTES
+		$queryPendientes = $pdo->prepare("SELECT * FROM Invitacion join Pregunta on (Pregunta.ID = Invitacion.ID_Pregunta) WHERE Invitacion.email ='".$nombre."' AND ID_Pregunta NOT IN  (SELECT ID_Pregunta FROM relacionusuariovota join Pregunta on (Pregunta.ID = relacionusuariovota.ID_Pregunta) WHERE relacionusuariovota.ID_Usuario =".$id['ID'].")");
 		$queryPendientes->execute();
 
 		$preguntasPendientes = $queryPendientes->fetch();
 
 
 
-
 //PREGUNTAS PENDIENTES
 		echo ("<h3>preguntas Pendientes</h3>");
-		echo ("<table id='preguntasPendientes' class='pregu'>");
+		echo ("<table id='preguntasPendientes' class='preguntas'>");
 			echo ("<tr>");
             	echo ("<th>PREGUNTA</th>");
             	echo ("<th>FECHA INICIO</th>");
@@ -63,14 +63,14 @@
 
 				echo ("<form action='votar.php' method='post'>");
 				echo ("<tr >");
-					echo ("<td><input type='text' name='pregunta' value='".$preguntasRealizadas['Pregunta']."' readonly></td>");
-			    	echo ("<td><input type='text' name='dInicio' value='".$preguntasRealizadas['DataInici']."' readonly></td>");
-			    	echo ("<td><input type='text' name='dFinal' value='".$preguntasRealizadas['DataFinal']."' readonly></td>");
+					echo ("<td><input type='text' name='pregunta' value='".$preguntasPendientes['Pregunta']."' readonly></td>");
+			    	echo ("<td><input type='text' name='dInicio' value='".$preguntasPendientes['DataInici']."' readonly></td>");
+			    	echo ("<td><input type='text' name='dFinal' value='".$preguntasPendientes['DataFinal']."' readonly></td>");
 
 			        echo ("<td><input value='VOTA' type='submit' id='VOTA' /></td>");
 
-			        echo ("<td><input type='text' name='id' value='".$preguntasRealizadas['ID']."' readonly hidden></td>");
-			    	echo ("<td><input type='text' name='uId' value='".$preguntasRealizadas['ID_Usuario']."' readonly hidden></td>");
+			        echo ("<td><input type='text' name='id' value='".$preguntasPendientes['ID']."' readonly hidden></td>");
+			    	echo ("<td><input type='text' name='uId' value='".$preguntasPendientes['ID_Usuario']."' readonly hidden></td>");
 
 			    echo ("</tr>");
 			    echo ("</form>");
@@ -83,7 +83,7 @@
 
 //PREGUNTAS REALIZADAS
 		echo ("<h3>preguntasRealizadas</h3>");
-		echo ("<table id='preguntasRealizadas'>");
+		echo ("<table id='preguntasRealizadas' class='preguntas'>");
 			echo ("<tr>");
             	echo ("<th>PREGUNTA</th>");
             	echo ("<th>FECHA INICIO</th>");
@@ -95,14 +95,14 @@
 
 				echo ("<form action='votar.php' method='post'>");
 				echo ("<tr >");
-					echo ("<td><input type='text' name='pregunta' value='".$preguntasPendientes['Pregunta']."' readonly></td>");
-			    	echo ("<td><input type='text' name='dInicio' value='".$preguntasPendientes['DataInici']."' readonly></td>");
-			    	echo ("<td><input type='text' name='dFinal' value='".$preguntasPendientes['DataFinal']."' readonly></td>");
+					echo ("<td><input type='text' name='pregunta' value='".$preguntasRealizadas['Pregunta']."' readonly></td>");
+			    	echo ("<td><input type='text' name='dInicio' value='".$preguntasRealizadas['DataInici']."' readonly></td>");
+			    	echo ("<td><input type='text' name='dFinal' value='".$preguntasRealizadas['DataFinal']."' readonly></td>");
 
 			        echo ("<td><input value='VOTA' type='submit' id='VOTA' /></td>");
 
-			        echo ("<td><input type='text' name='id' value='".$preguntasPendientes['ID']."' readonly hidden></td>");
-			    	echo ("<td><input type='text' name='uId' value='".$preguntasPendientes['ID_Usuario']."' readonly hidden></td>");
+			        echo ("<td><input type='text' name='id' value='".$preguntasRealizadas['ID']."' readonly hidden></td>");
+			    	echo ("<td><input type='text' name='uId' value='".$preguntasRealizadas['ID_Usuario']."' readonly hidden></td>");
 
 			    echo ("</tr>");
 			    echo ("</form>");
