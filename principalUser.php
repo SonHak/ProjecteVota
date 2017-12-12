@@ -31,7 +31,12 @@
 		echo("<a href='logout.php'><button type='button'>Logout</button></a>
 			</div>");
 
-		echo("<a href='crearConsulta.php'><button type='button'>Crear Consulta</button></a>");
+//PREGUNTAS PENDIENTES
+		$queryPendientes = $pdo->prepare("SELECT * FROM Invitacion join Pregunta on (Pregunta.ID = Invitacion.ID_Pregunta) WHERE Invitacion.email ='".$nombre."' AND ID_Pregunta NOT IN  (SELECT ID_Pregunta FROM relacionusuariovota join Pregunta on (Pregunta.ID = relacionusuariovota.ID_Pregunta) WHERE relacionusuariovota.ID_Usuario =".$id['ID'].")");
+		$queryPendientes->execute();
+
+		$preguntasPendientes = $queryPendientes->fetch();
+
 
 //PREGUNTAS REALIZADAS
 		//$query = $pdo->prepare("SELECT * FROM Pregunta");
@@ -39,14 +44,6 @@
 		$queryRealizadas->execute();
 
 		$preguntasRealizadas = $queryRealizadas->fetch();
-
-
-//PREGUNTAS PENDIENTES
-		$queryPendientes = $pdo->prepare("SELECT * FROM Invitacion join Pregunta on (Pregunta.ID = Invitacion.ID_Pregunta) WHERE Invitacion.email ='".$nombre."' AND ID_Pregunta NOT IN  (SELECT ID_Pregunta FROM relacionusuariovota join Pregunta on (Pregunta.ID = relacionusuariovota.ID_Pregunta) WHERE relacionusuariovota.ID_Usuario =".$id['ID'].")");
-		$queryPendientes->execute();
-
-		$preguntasPendientes = $queryPendientes->fetch();
-
 
 
 //PREGUNTAS PENDIENTES

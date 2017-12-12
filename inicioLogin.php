@@ -19,13 +19,13 @@
 
 		//FORMULARIO SI EL POST ESTA VACIO
 	if(!isset($_POST["email"])){	
+		formulario();
+	 // echo('<form action="inicioLogin.php" method="post" id="inicio">
+		// 	<p>EMAIL: <input type="text" name="email" required="true"></p>
+	 //    	<p>Password: <input type="password" name="password" required="true"></p>
 
-	 echo('<form action="inicioLogin.php" method="post" id="inicio">
-			<p>EMAIL: <input type="text" name="email" required="true"></p>
-	    	<p>Password: <input type="password" name="password" required="true"></p>
-
-	        <input value="Login" type="submit" id="inicio" />
-	     </form>');
+	 //        <input value="Login" type="submit" id="inicio" />
+	 //     </form>');
 
 	 	//SI EL FORMULARIO ESTA RELLENO HACE UNA QUERY PARA RECOGER EL ID COMPROBANDO EL EMAIL
 	}else{
@@ -49,9 +49,18 @@
 					$intermedia = $query->fetch();
 
 					$_SESSION["user"] = $intermedia[0];
-				//IF
-					
-					header('Location: principalUser.php');
+		//IF ADMIN
+					$query = $pdo->prepare("SELECT Admin FROM Usuarios WHERE Email = '".$_POST["email"]."'");
+					$query->execute();
+					$admin = $query->fetch();
+
+
+					if ($admin["Admin"]==1) {
+						header('Location: principal.php');
+					}else{
+						header('Location: principalUser.php');
+					}
+		
 				} catch (PDOException $e) {
    					echo "Failed to get DB handle: " . $e->getMessage() . "\n";
     				exit;
@@ -59,32 +68,53 @@
 			
 			//SI FALLA EL PASSWORD RECARGA EL FORMULARIO
 			}else{
-
 				 echo(' <p style="color:red; font-size:20px">Password erroneo!</p>
-				 	<br>
-				 	<form action="inicioLogin.php" method="post" id="inicio">
-					<p>EMAIL: <input type="text" name="email" required="true"></p>
-			    	<p>Password: <input type="password" name="password" required="true"></p>
+				 	<br>');
+				 formulario();
+				 
+				 // 	<form action="inicioLogin.php" method="post" id="inicio">
+					// <p>EMAIL: <input type="text" name="email" required="true"></p>
+			  //   	<p>Password: <input type="password" name="password" required="true"></p>
 
-			        <input value="Login" type="submit" id="inicio" />
-			     </form>');
+			  //       <input value="Login" type="submit" id="inicio" />
+			  //    </form>');
 
 			}
 
 			//SI FALLA EL EMAIL RECARGA EL FORMULARIO
 		} else {
 			echo(' <p style="color:red; font-size:20px">Email no encontrado!</p>
-				<br>
-				<form action="inicioLogin.php" method="post" id="inicio">
-					<p>EMAIL: <input type="text" name="email" required="true"></p>
-			    	<p>Password: <input type="password" name="password" required="true"></p>
+			 	<br>');
+			formulario();
 
-			        <input value="Login" type="submit" id="inicio" />
-			     </form>');
+			// 
+			// 	<form action="inicioLogin.php" method="post" id="inicio">
+			// 		<p>EMAIL: <input type="text" name="email" required="true"></p>
+			//     	<p>Password: <input type="password" name="password" required="true"></p>
+
+			//         <input value="Login" type="submit" id="inicio" />
+			//      </form>');
 		}
 		
 	}
 
+	function formulario(){
+		echo('<form action="inicioLogin.php" method="post" id="inicio">
+				<p>Email: <input type="text" name="email" required="true"></p>
+			    <p>Password: <input type="password" name="password" required="true"></p>
+
+			    <input value="Login" type="submit" id="inicio" />
+			</form>');
+
+		echo('<form action="creaCuenta.php" method="post" id="nuevaCuentaForm">
+				<p>Nombre: <input type="text" name="nombre" required="true"></p>
+				<p>Email: <input type="text" name="email" required="true"></p>
+			    <p>Password: <input type="password" name="password1" required="true"></p>
+			    <p>Repite el password: <input type="password" name="password2" required="true"></p>
+
+			    <input value="Login" type="submit" id="nuevaCuenta" />
+			</form>');
+	}
 
 	?>
      </div>
