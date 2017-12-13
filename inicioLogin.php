@@ -19,13 +19,9 @@
 
 		//FORMULARIO SI EL POST ESTA VACIO
 	if(!isset($_POST["email"])){	
+		
 		formulario();
-	 // echo('<form action="inicioLogin.php" method="post" id="inicio">
-		// 	<p>EMAIL: <input type="text" name="email" required="true"></p>
-	 //    	<p>Password: <input type="password" name="password" required="true"></p>
-
-	 //        <input value="Login" type="submit" id="inicio" />
-	 //     </form>');
+	
 
 	 	//SI EL FORMULARIO ESTA RELLENO HACE UNA QUERY PARA RECOGER EL ID COMPROBANDO EL EMAIL
 	}else{
@@ -70,15 +66,9 @@
 			}else{
 				 echo(' <p style="color:red; font-size:20px">Password erroneo!</p>
 				 	<br>');
+				
 				 formulario();
-				 
-				 // 	<form action="inicioLogin.php" method="post" id="inicio">
-					// <p>EMAIL: <input type="text" name="email" required="true"></p>
-			  //   	<p>Password: <input type="password" name="password" required="true"></p>
-
-			  //       <input value="Login" type="submit" id="inicio" />
-			  //    </form>');
-
+				
 			}
 
 			//SI FALLA EL EMAIL RECARGA EL FORMULARIO
@@ -87,26 +77,20 @@
 			 	<br>');
 			formulario();
 
-			// 
-			// 	<form action="inicioLogin.php" method="post" id="inicio">
-			// 		<p>EMAIL: <input type="text" name="email" required="true"></p>
-			//     	<p>Password: <input type="password" name="password" required="true"></p>
-
-			//         <input value="Login" type="submit" id="inicio" />
-			//      </form>');
 		}
 		
 	}
 
+	//FUNCION DE GENERACION DE FORMULARIOS
 	function formulario(){
-		echo('<form action="inicioLogin.php" method="post" id="inicio">
+		echo('<form action="inicioLogin.php" method="post" id="inicio" class="formularioInicio">
 				<p>Email: <input type="text" name="email" required="true"></p>
 			    <p>Password: <input type="password" name="password" required="true"></p>
 
 			    <input value="Login" type="submit" id="inicio" />
 			</form>');
 
-		echo('<form action="creaCuenta.php" method="post" id="nuevaCuentaForm">
+		echo('<form action="creaCuenta.php" method="post" id="nuevaCuentaForm" class="formularioInicio">
 				<p>Nombre: <input type="text" name="nombre" required="true"></p>
 				<p>Email: <input type="text" name="email" required="true"></p>
 			    <p>Password: <input type="password" name="password1" required="true"></p>
