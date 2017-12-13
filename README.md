@@ -1,6 +1,6 @@
 # ProjecteVota
 
-Hace falta un archivo config.php
+Para que funcione hace falta un archivo de configuracion, "config.php" con el siguente contenido:
 
 <?php
 	$hostname = "localhost";
