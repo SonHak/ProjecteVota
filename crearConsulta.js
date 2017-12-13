@@ -214,12 +214,20 @@ function crearFechaInicio(){
 	fechaInput.setAttribute("type","date");
 	fechaInput.setAttribute("name","fechaInicio");
 	fechaInput.setAttribute("min",fecha);
-	fechaInput.setAttribute("onblur","fechaMax(event)");
+	fechaInput.setAttribute("onblur","fechaMax()");
 	fechaInput.setAttribute("required","true");
 	fechaInicio.appendChild(fechaInput);
 	
 	var divPadre = document.createElement("DIV");
 	divPadre.appendChild(fechaInicio);
+	
+	var hora = document.createElement("INPUT");
+	hora.setAttribute("type","time");
+	hora.setAttribute("name","horaInicio");
+	hora.setAttribute("onblur","horaMax()");
+	hora.setAttribute("required","true");
+	divPadre.appendChild(hora);
+	
 	
 	var padre = document.getElementsByTagName("form")[0];
 	padre.insertBefore(divPadre, padre.firstChild);
@@ -243,14 +251,20 @@ function crearFechaFinal(){
 	var divPadre = document.createElement("DIV");
 	divPadre.appendChild(fechaFinal);
 	
+	var hora = document.createElement("INPUT");
+	hora.setAttribute("type","time");
+	hora.setAttribute("name","horaFinal");
+	hora.setAttribute("required","true");
+	divPadre.appendChild(hora);
+	
 	var padre = document.getElementsByTagName("form")[0];
-	padre.firstChild.appendChild(divPadre);
+	padre.insertBefore(divPadre,padre.firstChild.nextSibling);
 }
 
 function fechaMax(){
 	var fechaFinal = document.querySelector("input[name='fechaFinal']");
 	var fechaInicio = document.querySelector("input[name='fechaInicio']");
-	fechaFinal.setAttribute("min",fechaInicio.value)
+
 	if(fechaFinal.value < fechaInicio.value && fechaFinal.value == fechaInicio.value){
 		fechaFinal.focus();
 		fechaFinal.style.boxShadow = "-1px 1px 20px orange";
@@ -260,11 +274,18 @@ function fechaMax(){
 	
 }
 
+function horaMax(){
+	var horaInicio = document.querySelector("input[name='horaInicio']");
+	var horaFinal = document.querySelector("input[name='horaFinal']");
+
+	horaFinal.setAttribute("min",(parseInt(document.querySelector("input[name='horaInicio']").value)+4));
+	
+}
+
 function eliminarRespuestaUnica(event){
 	var padre = document.getElementsByTagName("form")[0];
 	
 	var padreDiv = event.currentTarget.parentNode;
-	//var id = parseInt(padreDiv.id);
 	
 	padre.removeChild(padreDiv);
 	
@@ -272,6 +293,14 @@ function eliminarRespuestaUnica(event){
 	
 	eliminarRespuestas();
 	for(var i = 2; i < hermanosArray.length; i++){
-			añadirElemento(crearLabel(),crearInput());
+			var label = crearLabel();
+			var input = crearInput();
+			input.setAttribute("value",hermanosArray[i].lastChild.previousSibling.value);
+			añadirElemento(label,input);
 	}
 }	
+
+
+
+
+
