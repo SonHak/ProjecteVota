@@ -59,12 +59,21 @@ body{
 	border: solid 2px #888;
 
 }
-form#inicio,#respuestas{
+
+.formularioInicio h4{
+	text-align: center;
+}
+
+.formularioInicio{
 	background-color: rgb(204, 204, 204);
 	border-radius: 4px;
-	width: 300px;
-	margin: 0 auto;
+	width: 500px;
+	margin: 10px;
+	display: inline-block;
+	vertical-align: middle;
+
 }
+
 img#logo{
 	height: 150px;
 	width: 250px;
@@ -76,6 +85,8 @@ div#botones{
 	width: 500px;
 }
 form#respuestas{
+	background-color: rgb(204, 204, 204);
+	border-radius: 4px;
 	width: 500px;
 }
 

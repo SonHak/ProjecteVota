@@ -37,7 +37,9 @@
 			$psswrd = $query->fetch();
 
 			//COMPRUEBA EL PASSWORD INTRODUCIDO CONTRA EL PASSWORD DE LA QUERY
-			if($psswrd[0] == $_POST["password"]){
+			$contra_enc = hash("sha256", $_POST["password"]);
+			
+			if($psswrd[0] == $contra_enc){
 				try {
 					$query = $pdo->prepare("SELECT Email FROM Usuarios WHERE ID = ".$id[0]);
 					$query->execute();
@@ -84,6 +86,7 @@
 	//FUNCION DE GENERACION DE FORMULARIOS
 	function formulario(){
 		echo('<form action="inicioLogin.php" method="post" id="inicio" class="formularioInicio">
+				<h4>Inicia sessión</h4>
 				<p>Email: <input type="text" name="email" required="true"></p>
 			    <p>Password: <input type="password" name="password" required="true"></p>
 
@@ -91,12 +94,13 @@
 			</form>');
 
 		echo('<form action="creaCuenta.php" method="post" id="nuevaCuentaForm" class="formularioInicio">
+				<h4>Registrate</h4>
 				<p>Nombre: <input type="text" name="nombre" required="true"></p>
 				<p>Email: <input type="text" name="email" required="true"></p>
-			    <p>Password: <input type="password" name="password1" required="true"></p>
-			    <p>Repite el password: <input type="password" name="password2" required="true"></p>
+			    <p>Introduce password: <input type="password" name="password1" required="true"></p>
+			    <p>Confirma password: <input type="password" name="password2" required="true"></p>
 
-			    <input value="Login" type="submit" id="nuevaCuenta" />
+			    <input value="registrate" type="submit" id="nuevaCuenta" />
 			</form>');
 	}
 
