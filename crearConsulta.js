@@ -278,7 +278,13 @@ function horaMax(){
 	var horaInicio = document.querySelector("input[name='horaInicio']");
 	var horaFinal = document.querySelector("input[name='horaFinal']");
 
-	horaFinal.setAttribute("min",(parseInt(document.querySelector("input[name='horaInicio']").value)+4));
+	var hora = parseInt(horaInicio.value.split(":")[0]);
+	var min = horaInicio.value.split(":")[1];
+	
+	hora = hora + 4;
+	hora = hora.toString();
+	
+	horaFinal.setAttribute("min",hora+":"+min);
 	
 }
 
