@@ -28,9 +28,9 @@
 		echo("<a href='logout.php'><button type='button'>Logout</button></a>
 			</div>");
 
+
 //RESPUSTA Y SUS DATOS
 		if(!isset($_POST["res"])){
-
 			$pregunta = $_POST["pregunta"];
 			$dInicio = $_POST["dInicio"];
 			$dFinal = $_POST["dFinal"];
@@ -41,6 +41,8 @@
 			$query->execute();
 
 			$respuesta = $query->fetch();
+
+			
 			
 			echo("<h3>".$pregunta."</h3>");
 
@@ -74,34 +76,38 @@
 			echo ("</div>");
 
 		}else{
+
+			$resp = $_POST["res"];
+			$qstr = "SELECT ID_Respuesta FROM Respuestas WHERE ID_Pregunta =".$_POST["idPregunta"]." AND Respuesta = '".$resp."'";
+
+			$query = $pdo->prepare( $qstr );
+			$query->execute();
+			
+			$respuesta = $query->fetch();
+
+
+
 			$query = $pdo->prepare("SELECT ID FROM Usuarios WHERE Email = '".$nombre."'");
 			$query->execute();
 			$id = $query->fetch();
 
-			$query = $pdo->prepare("SELECT * FROM relacionusuariovota WHERE ID_Usuario = '".$id[0]."'");
+			$query = $pdo->prepare("SELECT * FROM relacionusuariovota WHERE ID_Usuario = '".$id[0]."' AND ID_Pregunta =".$_POST["idPregunta"]);
 			$query->execute();
 			$contestada = $query->fetch();
 
 //MODIFICA
 			if ($contestada) {
-				$query2 = $pdo->prepare("SELECT hash_enc FROM relacionusuariovota WHERE ID_Usuario = '".$id[0]."'AND ID_Pregunta =".$_POST["idPregunta");
+				$query2 = $pdo->prepare("SELECT hash_enc FROM relacionusuariovota WHERE ID_Usuario = '".$id[0]."' AND ID_Pregunta =".$_POST["idPregunta"]);
 				$query2->execute();
 
 				$encontrarHash = $query2->fetch();
 
-				$query = $pdo->prepare("DELETE FROM relacionusuariovota WHERE ID_Usuario = '".$id[0]."' AND ID_Pregunta =".$_POST["idPregunta"]);
+
+
+				$query = $pdo->prepare("UPDATE Votaciones SET ID_Respuesta = ".$respuesta["ID_Respuesta"]." WHERE hash = '".$encontrarHash["hash_enc"]."'");
 				$query->execute();
+				echo $encontrarHash["hash_enc"];
 				
-//DESENCRIPTACION
-				$query = $pdo->prepare("DELETE FROM Votaciones WHERE hash = '".$encontrarHash["hash_enc"]."' AND ID_Pregunta =".$_POST["idPregunta"]);
-				$query->execute();
-
-
-				$query = $pdo->prepare("INSERT INTO relacionusuariovota(ID_Usuario,Votacion,ID_Pregunta) 
-										VALUES (?, ?, ?)");
-				$selected_val = $_POST['res'];
-				$query->execute(array($id[0], $selected_val, $_POST['idPregunta']));
-
 				echo ("Respuesta modificada con exito!");
 
 //NUEVA RESPUSTA			
@@ -114,10 +120,10 @@
 
 				$query->execute(array($id[0], $_POST['idPregunta'], $hash));
 
-				$query = $pdo->prepare("INSERT INTO Votaciones(hash, ID_Respuesta, ) 
+				$query2 = $pdo->prepare("INSERT INTO Votaciones(hash, ID_Respuesta) 
 										VALUES (?, ?)");
 				$selected_val = $_POST['res'];
-				$query->execute(array($hash, $respuesta['ID_Respuesta']));
+				$query2->execute(array($hash, $respuesta[0]));
 
 				echo ("Respuesta guardada con exito!");
 			}
@@ -136,7 +142,7 @@ function generaPass(){
     //Se define la variable que va a contener la contraseña
     $pass = "";
     //Se define la longitud de la contraseña, en mi caso 10, pero puedes poner la longitud que quieras
-    $longitudPass=10;
+    $longitudPass=6;
      
     //Creamos la contraseña
     for($i=1 ; $i<=$longitudPass ; $i++){
