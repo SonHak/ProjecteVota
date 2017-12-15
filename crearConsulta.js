@@ -42,7 +42,10 @@ function crearConsulta(){
 	//creamos los inputs y labels para las fechas
 	crearFechaInicio();
 	crearFechaFinal();
-
+	
+	document.querySelector("input[name='fechaFinal']").disabled = true;	
+	document.querySelector("input[name='horaInicio']").disabled = true;
+	document.querySelector("input[name='horaFinal']").disabled = true;
 	
 }
 
@@ -138,11 +141,7 @@ function crearInput(){
 function añadirElemento(elemento1,elemento2){	
 	//guardamos en una variable el padre donde se van a crear el nuevo Label y el nuevo Input
 	var padre = document.createElement("DIV");
-	
-	
-	var botonEliminar = document.createElement("BUTTON");
-	botonEliminar.setAttribute("onclick","eliminarRespuestaUnica(event)");
-	botonEliminar.appendChild(document.createTextNode("X")); 
+		
 	//le añadimos al padre un atributo id
 	padre.setAttribute("id",cantidadRespuestas);
 	if(padre.id == 1 || padre.id == 2){
@@ -151,8 +150,11 @@ function añadirElemento(elemento1,elemento2){
 	}else{
 		padre.appendChild(elemento1);
 		padre.appendChild(elemento2);
-		padre.appendChild(botonEliminar);
+		padre.appendChild(botonEliminar());
 	}
+
+	padre.appendChild(botonSubir());
+	padre.appendChild(botonBajar());
 	padre.setAttribute("class","respuestas");
 	
 	
@@ -165,8 +167,71 @@ function añadirElemento(elemento1,elemento2){
 	//y se lo añadimos
 	form.appendChild(padre);
 	
+	deshabilitarBotonSubirBajar();
 
 }
+
+function deshabilitarBotonSubirBajar(){
+	var arrayDivsRespuestas = document.querySelectorAll("DIV [class='respuestas']");
+	
+	for(var i = 0; i < arrayDivsRespuestas.length; i++){
+		if(arrayDivsRespuestas[i].id == 1){
+			document.querySelector("BUTTON[name='subir1']").disabled = true;
+		}else if(arrayDivsRespuestas[i].id == arrayDivsRespuestas.length){
+			var texto = "bajar"+arrayDivsRespuestas[i].id;
+			document.querySelector("BUTTON[name='"+texto+"'").disabled = true;
+		}else{
+			var texto = "bajar"+arrayDivsRespuestas[i].id;
+	
+			document.querySelector("BUTTON[name='"+texto+"']").disabled = false;	
+			document.querySelector("BUTTON[name='"+texto+"'").disabled = false;
+		}
+		
+	}
+}
+
+function botonEliminar(){
+	var botonEliminar = document.createElement("BUTTON");
+	botonEliminar.setAttribute("onclick","eliminarRespuestaUnica(event)");
+	botonEliminar.appendChild(document.createTextNode("X")); 
+	return botonEliminar;
+}
+
+function botonSubir(){
+	var botonSubirElem = document.createElement("BUTTON");
+	botonSubirElem.setAttribute("onclick","subirTextoInput(event)");
+	botonSubirElem.setAttribute("name","subir"+cantidadRespuestas);
+	botonSubirElem.appendChild(document.createTextNode("▲")); 
+	return botonSubirElem;
+
+}
+function botonBajar(){
+	var botonBajarElem = document.createElement("BUTTON");
+	botonBajarElem.setAttribute("onclick","bajarTextoInput(event)");
+	botonBajarElem.setAttribute("name","bajar"+cantidadRespuestas);
+	botonBajarElem.appendChild(document.createTextNode("▼")); 
+	return botonBajarElem;
+
+}
+
+function subirTextoInput(event){
+	var divPadreID = event.currentTarget.parentNode.id;
+	var arrayDivsRespuestas = document.querySelectorAll("DIV [class='respuestas']");
+	
+	for(var i = 0; i < arrayDivsRespuestas.length; i++){
+		if(arrayDivsRespuestas[i].id == divPadreID){
+			var valor1 = arrayDivsRespuestas[i].querySelector("INPUT").value;
+			var valor2 = arrayDivsRespuestas[i-1].querySelector("INPUT").value;
+		}
+	}
+	
+}
+function bajarTextoInput(event){
+	var divPadreID = event.currentTarget.parentNode.id;
+	var arrayDivsRespuestas = document.querySelectorAll("DIV [class='respuestas']");
+	
+}
+
 
 function eliminarRespuestas(){
 	
@@ -208,13 +273,13 @@ function crearFechaInicio(){
 	if(mes < 10){
 		mes = "0"+mes;
 	}
-	var fecha = ano+"-"+mes+"-"+(dia);
+	var fecha = ano+"-"+mes+"-"+dia;
 	
 	var fechaInput = document.createElement("INPUT");
 	fechaInput.setAttribute("type","date");
 	fechaInput.setAttribute("name","fechaInicio");
 	fechaInput.setAttribute("min",fecha);
-	fechaInput.setAttribute("onblur","fechaMax()");
+	fechaInput.setAttribute("onblur","habilitarFechaFinal()");
 	fechaInput.setAttribute("required","true");
 	fechaInicio.appendChild(fechaInput);
 	
@@ -224,7 +289,7 @@ function crearFechaInicio(){
 	var hora = document.createElement("INPUT");
 	hora.setAttribute("type","time");
 	hora.setAttribute("name","horaInicio");
-	hora.setAttribute("onblur","horaMax()");
+	hora.setAttribute("onblur","habilitarHoraFinal()");
 	hora.setAttribute("required","true");
 	divPadre.appendChild(hora);
 	
@@ -245,6 +310,7 @@ function crearFechaFinal(){
 	fechaInput.setAttribute("required","true");
 	fechaInput.setAttribute("type","date");
 	fechaInput.setAttribute("name","fechaFinal");
+	fechaInput.setAttribute("onblur","fechaMax()");
 
 	fechaFinal.appendChild(fechaInput);
 	
@@ -254,6 +320,7 @@ function crearFechaFinal(){
 	var hora = document.createElement("INPUT");
 	hora.setAttribute("type","time");
 	hora.setAttribute("name","horaFinal");
+	//~ hora.setAttribute("onblur","habilitarHora()");
 	hora.setAttribute("required","true");
 	divPadre.appendChild(hora);
 	
@@ -274,19 +341,6 @@ function fechaMax(){
 	
 }
 
-function horaMax(){
-	var horaInicio = document.querySelector("input[name='horaInicio']");
-	var horaFinal = document.querySelector("input[name='horaFinal']");
-
-	var hora = parseInt(horaInicio.value.split(":")[0]);
-	var min = horaInicio.value.split(":")[1];
-	
-	hora = hora + 4;
-	hora = hora.toString();
-	
-	horaFinal.setAttribute("min",hora+":"+min);
-	
-}
 
 function eliminarRespuestaUnica(event){
 	var padre = document.getElementsByTagName("form")[0];
@@ -307,6 +361,23 @@ function eliminarRespuestaUnica(event){
 }	
 
 
+function habilitarFechaFinal(){
+	var fechaInicio = document.querySelector("input[name='fechaInicio']");
+	var fechaFinal = document.querySelector("input[name='fechaFinal']");
+	
+	var yy = parseInt(fechaInicio.value.split("-")[0]);
+	var mm = parseInt(fechaInicio.value.split("-")[1]);
+	var dd = parseInt(fechaInicio.value.split("-")[2]);
+	dd++;
+	var fecha = yy+"-"+mm+"-"+dd;
+	
+	fechaFinal.setAttribute("min",fecha);
+	fechaFinal.disabled = false;
+	
+	document.querySelector("input[name='horaInicio']").disabled = false;
+	
+}
+function habilitarHoraFinal(){
 
-
-
+	document.querySelector("input[name='horaFinal']").disabled = false;
+}
