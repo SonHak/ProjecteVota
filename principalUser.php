@@ -47,8 +47,12 @@
 
 
 //PREGUNTAS PENDIENTES
-		echo ("<h3>preguntas Pendientes</h3>");
 		echo ("<table id='preguntasPendientes' class='preguntas'>");
+
+		echo ("<tr>");
+		echo ("<th><h3>Preguntas Pendientes</h3></th>");
+		echo ("</tr>");
+
 			echo ("<tr>");
             	echo ("<th>PREGUNTA</th>");
             	echo ("<th>FECHA INICIO</th>");
@@ -79,8 +83,12 @@
 
 
 //PREGUNTAS REALIZADAS
-		echo ("<h3>preguntasRealizadas</h3>");
 		echo ("<table id='preguntasRealizadas' class='preguntas'>");
+
+		echo ("<tr>");
+		echo ("<th><h3>Preguntas Realizadas</h3></th>");
+		echo ("</tr>");
+
 			echo ("<tr>");
             	echo ("<th>PREGUNTA</th>");
             	echo ("<th>FECHA INICIO</th>");

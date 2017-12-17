@@ -18,6 +18,7 @@
 	include("/var/www/html/ProjecteVota/config.php");
 
 
+
 //INCLUIR EN TODOS LOS DOCUMENTOS
 		session_start();
 		$nombre = $_SESSION["user"];

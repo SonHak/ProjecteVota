@@ -10,7 +10,9 @@
 
 <?php
 
-include("/var/www/html/ProjecteVota/config.php");
+  include("/var/www/html/ProjecteVota/config.php");
+
+
 
 $nombre = $_POST["nombre"];
 $email = $_POST["email"];
