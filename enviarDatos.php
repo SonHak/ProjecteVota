@@ -21,14 +21,16 @@
 
 	$dInicio = $_POST['fechaInicio'];
 	$dFinal = $_POST['fechaFinal'];
+	$hInicio = $_POST['horaInicio'];
+	$hFinal = $_POST['horaFinal'];
 	$pregunta = $_POST['pregunta'];
 	
 
 	
 	
-	$query = $pdo->prepare("INSERT INTO Pregunta(Pregunta,ID_Usuario,DataInici,DataFinal) 
-							VALUES (?, ?, ?, ?)");
-	$query->execute(array($pregunta,$id[0],$dInicio,$dFinal));
+	$query = $pdo->prepare("INSERT INTO Pregunta(Pregunta,ID_Usuario,DataInici,DataFinal,HoraInicio,HoraFinal) 
+							VALUES (?, ?, ?, ?, ?, ?)");
+	$query->execute(array($pregunta,$id[0],$dInicio,$dFinal,$hInicio,$hFinal));
 	
 	
 	$query = $pdo->prepare("SELECT MAX(ID) FROM Pregunta WHERE ID_Usuario = ".$id[0]);

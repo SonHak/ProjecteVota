@@ -1,12 +1,11 @@
 //Variable global que cuenta cuantas respuestas (inputs) hay
 var cantidadRespuestas = 1;
 
-//Variables globales para la efcha actual
+//Variables globales para la fecha actual
 var hoy = new Date();
 var dia = hoy.getDate();
 var mes = hoy.getMonth()+1;
 var ano = hoy.getFullYear();
-var fechaMax;
 
 function crearConsulta(){
 
@@ -30,22 +29,23 @@ function crearConsulta(){
 		mostrar(respuesta[i]);
 	}
 	
-	//añadimos dos respuestas como mínimo obligatoriamente
-	añadirElemento(crearLabel(),crearInput());
-	añadirElemento(crearLabel(),crearInput());
-	
 	//creamos los siguientes botones
 	crearBotonRespuestas();
 	crearBotonEliminar();
-	crearBotonEnviar()
+	crearBotonEnviar();
 	
 	//creamos los inputs y labels para las fechas
 	crearFechaInicio();
 	crearFechaFinal();
 	
+	//añadimos dos respuestas como mínimo obligatoriamente
+	añadirElemento(crearLabel(),crearInput());
+	añadirElemento(crearLabel(),crearInput());
+	
 	document.querySelector("input[name='fechaFinal']").disabled = true;	
 	document.querySelector("input[name='horaInicio']").disabled = true;
 	document.querySelector("input[name='horaFinal']").disabled = true;
+	
 	
 }
 
@@ -126,6 +126,7 @@ function crearLabel(){
 	
 }
 
+//la siguiente funcion crea un input nuevo
 function crearInput(){
 	//creamos el elemento y lo guardamos en una variable
 	var inputNuevo = document.createElement("INPUT");
@@ -138,12 +139,15 @@ function crearInput(){
 	
 }
 
+//añade elementos que se han pasado a un div que crea de cero y lo añade a la pagina
 function añadirElemento(elemento1,elemento2){	
 	//guardamos en una variable el padre donde se van a crear el nuevo Label y el nuevo Input
 	var padre = document.createElement("DIV");
 		
 	//le añadimos al padre un atributo id
 	padre.setAttribute("id",cantidadRespuestas);
+	
+	//este if comprueba las respuestas, y solo a partir de la 3r respuesta añade el botón ELIMINARUNICARESPUESTA
 	if(padre.id == 1 || padre.id == 2){
 		padre.appendChild(elemento1);
 		padre.appendChild(elemento2);
@@ -153,8 +157,10 @@ function añadirElemento(elemento1,elemento2){
 		padre.appendChild(botonEliminar());
 	}
 
+	//añadimos tambien los botones subir respuesta o bajar respuesta
 	padre.appendChild(botonSubir());
 	padre.appendChild(botonBajar());
+	//hacemos que todos los divs que creamos tenga la misma clase, en este caso respuesta
 	padre.setAttribute("class","respuestas");
 	
 	
@@ -167,29 +173,60 @@ function añadirElemento(elemento1,elemento2){
 	//y se lo añadimos
 	form.appendChild(padre);
 	
+	//comprobamos que boton subir/bajar respuesta hay que deshabilitar
 	deshabilitarBotonSubirBajar();
 
 }
 
+//comprobamos que boton subir/bajar respuesta hay que deshabilitar
 function deshabilitarBotonSubirBajar(){
+	//recogemos todos los divs con la clase respuesta y lo guardamos en una array
 	var arrayDivsRespuestas = document.querySelectorAll("DIV [class='respuestas']");
 	
+	var texto;
+	//comprobamos la id de los div
 	for(var i = 0; i < arrayDivsRespuestas.length; i++){
-		if(arrayDivsRespuestas[i].id == 1){
-			document.querySelector("BUTTON[name='subir1']").disabled = true;
-		}else if(arrayDivsRespuestas[i].id == arrayDivsRespuestas.length){
-			var texto = "bajar"+arrayDivsRespuestas[i].id;
-			document.querySelector("BUTTON[name='"+texto+"'").disabled = true;
-		}else{
-			var texto = "bajar"+arrayDivsRespuestas[i].id;
-	
-			document.querySelector("BUTTON[name='"+texto+"']").disabled = false;	
-			document.querySelector("BUTTON[name='"+texto+"'").disabled = false;
-		}
 		
+		//si cualquier input para la fecha o la hora hace que se deshabilite los botones subir o bajar respuesta
+		/*if(document.querySelector("input[name='fechaInicio']").value == "" || 
+		   document.querySelector("input[name='fechaFinal']").value == "" ||
+		   document.querySelector("input[name='horaInicio']").value == "" ||
+		   document.querySelector("input[name='horaFinal']").value == "")
+		   {
+			texto = "subir"+arrayDivsRespuestas[i].id;
+			document.querySelector("BUTTON[name='"+texto+"']").disabled = true;	
+		
+			texto = "bajar"+arrayDivsRespuestas[i].id;
+			document.querySelector("BUTTON[name='"+texto+"'").disabled = true;
+			
+			
+		}else{*/
+			if(arrayDivsRespuestas[i].id == 1){
+			//en caso de que sea la id 1 deshabilita solo el boton subir respuesta
+			document.querySelector("BUTTON[name='subir1']").disabled = true;
+			document.querySelector("BUTTON[name='bajar1'").disabled = false;
+			
+			}else if(arrayDivsRespuestas[i].id == arrayDivsRespuestas.length){
+				//en caso de que sea el ultimo div de todos solo deshabilita el boton bajar respuesta
+				texto = "subir"+arrayDivsRespuestas[i].id;
+				document.querySelector("BUTTON[name='"+texto+"'").disabled = false;
+				
+				texto = "bajar"+arrayDivsRespuestas[i].id;
+				document.querySelector("BUTTON[name='"+texto+"'").disabled = true;
+			}else{
+				//si se trata de cualquier otro habilitara los dos botones
+				texto = "subir"+arrayDivsRespuestas[i].id;
+				document.querySelector("BUTTON[name='"+texto+"']").disabled = false;	
+			
+				texto = "bajar"+arrayDivsRespuestas[i].id;
+				document.querySelector("BUTTON[name='"+texto+"'").disabled = false;
+			}
+		//}
 	}
+	
 }
 
+//esta funcion solo crea un boton que tendrá una función en específico
 function botonEliminar(){
 	var botonEliminar = document.createElement("BUTTON");
 	botonEliminar.setAttribute("onclick","eliminarRespuestaUnica(event)");
@@ -197,6 +234,7 @@ function botonEliminar(){
 	return botonEliminar;
 }
 
+//esta funcion solo crea el botón de subir respuesta con una función en específico
 function botonSubir(){
 	var botonSubirElem = document.createElement("BUTTON");
 	botonSubirElem.setAttribute("onclick","subirTextoInput(event)");
@@ -205,6 +243,8 @@ function botonSubir(){
 	return botonSubirElem;
 
 }
+
+//esta funcion solo crea el botón de bajar respuesta con una función en específico
 function botonBajar(){
 	var botonBajarElem = document.createElement("BUTTON");
 	botonBajarElem.setAttribute("onclick","bajarTextoInput(event)");
@@ -214,6 +254,7 @@ function botonBajar(){
 
 }
 
+//esta funcion intercambia la respuesta con la de arriba
 function subirTextoInput(event){
 	var divPadreID = event.currentTarget.parentNode.id;
 	var arrayDivsRespuestas = document.querySelectorAll("DIV [class='respuestas']");
@@ -222,17 +263,37 @@ function subirTextoInput(event){
 		if(arrayDivsRespuestas[i].id == divPadreID){
 			var valor1 = arrayDivsRespuestas[i].querySelector("INPUT").value;
 			var valor2 = arrayDivsRespuestas[i-1].querySelector("INPUT").value;
+			arrayDivsRespuestas[i].querySelector("INPUT").value = valor2;
+			arrayDivsRespuestas[i-1].querySelector("INPUT").value = valor1;
+			
+			arrayDivsRespuestas[i-1].querySelector("INPUT").setAttribute("value", valor1);
+			arrayDivsRespuestas[i].querySelector("INPUT").setAttribute("value", valor2);
 		}
-	}
 	
+	}
 }
+
+//esta funcion intercambia la respuesta con la de abajo
 function bajarTextoInput(event){
 	var divPadreID = event.currentTarget.parentNode.id;
 	var arrayDivsRespuestas = document.querySelectorAll("DIV [class='respuestas']");
 	
+	for(var i = 0; i < arrayDivsRespuestas.length; i++){
+		if(arrayDivsRespuestas[i].id == divPadreID){
+			var valor1 = arrayDivsRespuestas[i].querySelector("INPUT").value;
+			var valor2 = arrayDivsRespuestas[i+1].querySelector("INPUT").value;
+			arrayDivsRespuestas[i].querySelector("INPUT").value = valor2;
+			arrayDivsRespuestas[i+1].querySelector("INPUT").value = valor1;
+			
+			arrayDivsRespuestas[i+1].querySelector("INPUT").setAttribute("value", valor1);
+			arrayDivsRespuestas[i].querySelector("INPUT").setAttribute("value", valor2);
+		}
+	
+	}
+	
 }
 
-
+//elimina todas las respuestas excepto la respuesta 1 y 2
 function eliminarRespuestas(){
 	
 	//recorremos todos los divs que tenemos en el documento
@@ -244,8 +305,10 @@ function eliminarRespuestas(){
 	}
 	//devolvemos la variable global cantidadRespuestas a 3
 	cantidadRespuestas = 3;
+	deshabilitarBotonSubirBajar();
 }
 
+//se elimina de dentro del form el elemento que se le pasa 
 function eliminarElemento(elemento){
 	//recoge el padre general del elemento pasado
 	var padre = document.getElementsByTagName("form")[0];
@@ -254,6 +317,7 @@ function eliminarElemento(elemento){
 	
 }
 
+//comprueba los inputs y ejecutan si pierden el foco
 function inputVacio(event){
 	var elemento = event.currentTarget;
 	if(elemento.value.length == 0){
@@ -310,7 +374,7 @@ function crearFechaFinal(){
 	fechaInput.setAttribute("required","true");
 	fechaInput.setAttribute("type","date");
 	fechaInput.setAttribute("name","fechaFinal");
-	fechaInput.setAttribute("onblur","fechaMax()");
+	//~ fechaInput.setAttribute("onblur","fechaMax()");
 
 	fechaFinal.appendChild(fechaInput);
 	
@@ -320,7 +384,7 @@ function crearFechaFinal(){
 	var hora = document.createElement("INPUT");
 	hora.setAttribute("type","time");
 	hora.setAttribute("name","horaFinal");
-	//~ hora.setAttribute("onblur","habilitarHora()");
+    hora.setAttribute("onblur","deshabilitarBotonSubirBajar()");
 	hora.setAttribute("required","true");
 	divPadre.appendChild(hora);
 	
@@ -328,10 +392,13 @@ function crearFechaFinal(){
 	padre.insertBefore(divPadre,padre.firstChild.nextSibling);
 }
 
+/* ÉSta función comprobava las fechas y en caso de que fueran iguales o la fecha final fuera menor a la fecha de inicio
+ * se resaltaba dicho input con color naranja
 function fechaMax(){
 	var fechaFinal = document.querySelector("input[name='fechaFinal']");
 	var fechaInicio = document.querySelector("input[name='fechaInicio']");
-
+	
+	
 	if(fechaFinal.value < fechaInicio.value && fechaFinal.value == fechaInicio.value){
 		fechaFinal.focus();
 		fechaFinal.style.boxShadow = "-1px 1px 20px orange";
@@ -340,8 +407,9 @@ function fechaMax(){
 	}
 	
 }
+*/
 
-
+//esta función solo elimina la respuesta que haya sido clicada
 function eliminarRespuestaUnica(event){
 	var padre = document.getElementsByTagName("form")[0];
 	
@@ -355,12 +423,12 @@ function eliminarRespuestaUnica(event){
 	for(var i = 2; i < hermanosArray.length; i++){
 			var label = crearLabel();
 			var input = crearInput();
-			input.setAttribute("value",hermanosArray[i].lastChild.previousSibling.value);
+			input.setAttribute("value",hermanosArray[i].querySelector("INPUT").value);
 			añadirElemento(label,input);
 	}
 }	
 
-
+//habilita el input para la fecha final y hace que la fecha minima sea la escogida en fechaInicio
 function habilitarFechaFinal(){
 	var fechaInicio = document.querySelector("input[name='fechaInicio']");
 	var fechaFinal = document.querySelector("input[name='fechaFinal']");
@@ -377,6 +445,8 @@ function habilitarFechaFinal(){
 	document.querySelector("input[name='horaInicio']").disabled = false;
 	
 }
+
+//habilita simplemente el input horaFinal
 function habilitarHoraFinal(){
 
 	document.querySelector("input[name='horaFinal']").disabled = false;
