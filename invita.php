@@ -52,7 +52,7 @@
 				    echo ("</form>");
 
 		}else{
-			$arrayEmails = $_POST['emails'].split(";");
+			$Emails = split(";",$_POST['emails']);
 			
 			foreach($arrayEmails as $email){
 				$titulo    = 'Has sido invitado';
