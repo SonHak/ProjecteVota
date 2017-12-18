@@ -28,13 +28,14 @@ function animacion(elemento) {
 function setPass(id){
     
     var contrasenya = prompt("Porfavor introduzca su contraseña:");
-    if (contrasenya == null || contrasenya == "") {
+
+    if (contrasenya == undefined || contrasenya == "" || contrasenya == null) {
       
       document.getElementById("cancell").innerHTML = "Se ha cancelado la votación";
-      
+
     } else {
         document.getElementById("contra"+id).value = contrasenya;
-        
+        document.getElementById("setContra"+id).setAttribute("type","submit");
         document.getElementById("formu"+id).submit();
     }
     

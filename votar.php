@@ -25,7 +25,7 @@
 
 
 		echo("<div id='login'>
-				<p>hola, ".$nombre."</p><br>");
+				<p>hola, ".$nombre."</p>");
 		echo("<a href='logout.php'><button type='button'>Logout</button></a>
 			</div>");
 
@@ -60,13 +60,13 @@
 					$respuesta2 = $respuesta['Respuesta'];
 		
 						echo ("<div class='formu' id='formu".$cont."'>");
-					echo ("<form action='votar.php' method='post' id='form".$cont."'>");
+						echo ("<form action='votar.php' method='post' id='form".$cont."'>");
 						
 
 						echo ("<div class='respuestas' id ='vota".$cont."'> <input type='text' name='res' value='".$respuesta2."' readonly/>");
 						echo("<input type='text' name='idPregunta' value='".$idPregunta."' readonly hidden/>");
 				        echo("<input type='password' name='pass' value='' id='contra".$cont."' readonly hidden/>");
-				        echo("<button value='VOTA' onclick='setPass(".$cont.")' id='setContra' /> </div>");
+				        echo("<button type='button' value='VOTA' onclick='setPass(".$cont.")' id='setContra".$cont."' /> </div>");
 
 						
 				    echo ("</form>");
