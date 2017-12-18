@@ -25,15 +25,16 @@
 			</div>");
 
 
-		$pregunta = $_POST["pregunta"];
-		$dInicio = $_POST["dInicio"];
-		$dFinal = $_POST["dFinal"];
-		$idPregunta = $_POST["id"];
+	
 
 
 //SI NO SE HAN RELLENADO LOS EMAILS
 		if(!isset($_POST["emails"])){
-
+			$pregunta = $_POST["pregunta"];
+			$dInicio = $_POST["dInicio"];
+			$dFinal = $_POST["dFinal"];
+			$idPregunta = $_POST["id"];
+			
 			echo("<h3>".$pregunta."</h3>");
 
 				echo("<div >
@@ -48,11 +49,26 @@
 						echo ("<textarea type='textArea' name='emails' cols='50' rows='15'> </textArea>");
 						echo "<br>";
 				        echo ("<input value='INVITA' type='submit' id='invita' />");
-
+						echo ("<textarea type='textArea' name='pregunta' cols='50' rows='15' value='".$pregunta."' hidden> </textArea>");
 				    echo ("</form>");
 
 		}else{
+			
+			$Emails = $_POST['emails'];
+			$arrayEmails = explode(";",$Emails);
+			
+			foreach($arrayEmails as $email){
+				$titulo    = 'Has sido invitado';
+				$mensaje   = 'Ha sido usted invitado para votar a la pregunta: ' . $_POST['pregunta'];
+				$cabeceras = 'From: adrytaisho@gmail.com' . "\r\n" .
+					'Reply-To: adrytaisho@gmail.com' . "\r\n" .
+					'X-Mailer: PHP/' . phpversion();
 
+				mail ($email, $titulo, $mensaje, $cabeceras);
+				echo "<p>correo enviado</p>";
+			}
+			
+			
 		}
 
 	?>
