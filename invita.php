@@ -52,17 +52,19 @@
 				    echo ("</form>");
 
 		}else{
-			$Emails = split(";",$_POST['emails']);
-			
+			$Emails = $_POST['emails'];
+			echo($Emails);
+			$arrayEmails = explode(";",$Emails);
+			print_r($arrayEmails);
 			foreach($arrayEmails as $email){
 				$titulo    = 'Has sido invitado';
 				$mensaje   = 'Ha sido usted invitado para votar a la pregunta: \n' . $pregunta;
-				$cabeceras = 'From: acardenaslara@iesteveterradas.cat' . "\r\n" .
-					'Reply-To: webmaster@example.com' . "\r\n" .
+				$cabeceras = 'From: adrytaisho@gmail.com' . "\r\n" .
+					'Reply-To: adrytaisho@gmail.com' . "\r\n" .
 					'X-Mailer: PHP/' . phpversion();
 
 				mail ($email, $titulo, $mensaje, $cabeceras);
-				echo "correo enviado";
+				echo "<p>correo enviado</p>";
 			}
 			
 			
