@@ -102,7 +102,7 @@
 				$query2->execute();
 
 				$encontrarHash = $query2->fetch();
-
+	//DESENCRYPT
 
 
 				$query = $pdo->prepare("UPDATE Votaciones SET ID_Respuesta = ".$respuesta["ID_Respuesta"]." WHERE hash = '".$encontrarHash["hash_enc"]."'");
@@ -113,11 +113,12 @@
 
 //NUEVA RESPUSTA			
 			}else{
+				$hash = generaPass();
+				
+	//ENCRYPT
 				$query = $pdo->prepare("INSERT INTO relacionusuariovota(ID_Usuario, ID_Pregunta, hash_enc) 
 										VALUES (?, ?, ?)");
 				$selected_val = $_POST['res'];
-
-				$hash = generaPass();
 
 				$query->execute(array($id[0], $_POST['idPregunta'], $hash));
 
