@@ -52,7 +52,20 @@
 				    echo ("</form>");
 
 		}else{
+			$arrayEmails = $_POST['emails'].split(";");
+			
+			foreach($arrayEmails as $email){
+				$titulo    = 'Has sido invitado';
+				$mensaje   = 'Ha sido usted invitado para votar a la pregunta: \n' . $pregunta;
+				$cabeceras = 'From: acardenaslara@iesteveterradas.cat' . "\r\n" .
+					'Reply-To: webmaster@example.com' . "\r\n" .
+					'X-Mailer: PHP/' . phpversion();
 
+				mail ($email, $titulo, $mensaje, $cabeceras);
+				echo "correo enviado";
+			}
+			
+			
 		}
 
 	?>
