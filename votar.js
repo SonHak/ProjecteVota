@@ -26,11 +26,12 @@ function animacion(elemento) {
 
 //PROMPT DE LA PASWORD
 function setPass(id){
-    var txt;
+    
     var contrasenya = prompt("Porfavor introduzca su contraseña:");
     if (contrasenya == null || contrasenya == "") {
-      txt = "Se ha cancelado la votación";
-      document.getElementById("cancell").innerHTML = txt;
+      
+      document.getElementById("cancell").innerHTML = "Se ha cancelado la votación";
+      
     } else {
         document.getElementById("contra"+id).value = contrasenya;
         

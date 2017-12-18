@@ -25,7 +25,7 @@
 
 
 		echo("<div id='login'>
-				hola, ".$nombre."<br>");
+				<p>hola, ".$nombre."</p><br>");
 		echo("<a href='logout.php'><button type='button'>Logout</button></a>
 			</div>");
 

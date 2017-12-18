@@ -8,7 +8,7 @@
 <body>
 	<header><img src="imagenes/VotaBanner.png"></header>
 	
-	<a href='principal.php'><img id='home' src='imagenes/home.png'></a>
+	<a href='principalUser.php'><img id='home' src='imagenes/home.png'></a>
 
 	<?php
 

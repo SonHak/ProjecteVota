@@ -8,7 +8,7 @@
 <body>
 	<header><img src="imagenes/VotaBanner.png"></header>
 	
-	<a href='principal.php'><img id='home' src='imagenes/home.png'></a>
+	<a href='principalAdmin.php'><img id='home' src='imagenes/home.png'></a>
 
 	<?php
 
@@ -32,26 +32,25 @@
 		$query->execute();
 
 		$pregunta = $query->fetch();
-		echo ("<table id='preguntas'>");
+		echo ("<table id='preguntas' class='preguntas'>");
 			echo ("<tr>");
             	echo ("<th>PREGUNTA</th>");
             	echo ("<th>FECHA INICIO</th>");
             	echo ("<th>FECHA FINAL</th>");
-            	echo ("<th>VOTA</th>");
+            	echo ("<th>INVITA</th>");
             echo ("</tr>");
 
 		while($pregunta){
 
-				echo ("<form action='votar.php' method='post'>");
+				echo ("<form action='invita.php' method='post'>");
 				echo ("<tr >");
 					echo ("<td><input type='text' name='pregunta' value='".$pregunta['Pregunta']."' readonly></td>");
 			    	echo ("<td><input type='text' name='dInicio' value='".$pregunta['DataInici']."' readonly></td>");
 			    	echo ("<td><input type='text' name='dFinal' value='".$pregunta['DataFinal']."' readonly></td>");
 
-			        echo ("<td><input value='VOTA' type='submit' id='VOTA' /></td>");
+			        echo ("<td><input value='INVITA' type='submit' id='invita' /></td>");
 
 			        echo ("<td><input type='text' name='id' value='".$pregunta['ID']."' readonly hidden></td>");
-			    	echo ("<td><input type='text' name='uId' value='".$pregunta['ID_Usuario']."' readonly hidden></td>");
 
 			    echo ("</tr>");
 			    echo ("</form>");

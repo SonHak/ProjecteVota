@@ -51,6 +51,6 @@
 	}
 	
 	
-	header('Location: principal.php');
+	header('Location: principalAdmin.php');
 	
 ?>

@@ -54,7 +54,7 @@
 
 
 					if ($admin["Admin"]==1) {
-						header('Location: principal.php');
+						header('Location: principalAdmin.php');
 					}else{
 						header('Location: principalUser.php');
 					}
