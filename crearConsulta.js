@@ -187,21 +187,7 @@ function deshabilitarBotonSubirBajar(){
 	//comprobamos la id de los div
 	for(var i = 0; i < arrayDivsRespuestas.length; i++){
 		
-		//si cualquier input para la fecha o la hora hace que se deshabilite los botones subir o bajar respuesta
-		/*if(document.querySelector("input[name='fechaInicio']").value == "" || 
-		   document.querySelector("input[name='fechaFinal']").value == "" ||
-		   document.querySelector("input[name='horaInicio']").value == "" ||
-		   document.querySelector("input[name='horaFinal']").value == "")
-		   {
-			texto = "subir"+arrayDivsRespuestas[i].id;
-			document.querySelector("BUTTON[name='"+texto+"']").disabled = true;	
-		
-			texto = "bajar"+arrayDivsRespuestas[i].id;
-			document.querySelector("BUTTON[name='"+texto+"'").disabled = true;
-			
-			
-		}else{*/
-			if(arrayDivsRespuestas[i].id == 1){
+		if(arrayDivsRespuestas[i].id == 1){
 			//en caso de que sea la id 1 deshabilita solo el boton subir respuesta
 			document.querySelector("BUTTON[name='subir1']").disabled = true;
 			document.querySelector("BUTTON[name='bajar1'").disabled = false;
@@ -221,7 +207,6 @@ function deshabilitarBotonSubirBajar(){
 				texto = "bajar"+arrayDivsRespuestas[i].id;
 				document.querySelector("BUTTON[name='"+texto+"'").disabled = false;
 			}
-		//}
 	}
 	
 }
@@ -238,6 +223,7 @@ function botonEliminar(){
 function botonSubir(){
 	var botonSubirElem = document.createElement("BUTTON");
 	botonSubirElem.setAttribute("onclick","subirTextoInput(event)");
+	botonSubirElem.setAttribute("type","button");
 	botonSubirElem.setAttribute("name","subir"+cantidadRespuestas);
 	botonSubirElem.appendChild(document.createTextNode("▲")); 
 	return botonSubirElem;
@@ -248,6 +234,7 @@ function botonSubir(){
 function botonBajar(){
 	var botonBajarElem = document.createElement("BUTTON");
 	botonBajarElem.setAttribute("onclick","bajarTextoInput(event)");
+	botonBajarElem.setAttribute("type","button");
 	botonBajarElem.setAttribute("name","bajar"+cantidadRespuestas);
 	botonBajarElem.appendChild(document.createTextNode("▼")); 
 	return botonBajarElem;
