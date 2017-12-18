@@ -1,3 +1,5 @@
+
+//ANIMACION DE LAS VOTACIONES
 function efecto(){
 	var respuestas = document.getElementsByClassName("formu");
 	 for (var i = 0; i < respuestas.length ; i++) {
@@ -19,4 +21,20 @@ function animacion(elemento) {
       elemento.style.left = pos + 'px'; 
     }
   }
+}
+
+
+//PROMPT DE LA PASWORD
+function setPass(id){
+    var txt;
+    var contrasenya = prompt("Porfavor introduzca su contraseña:");
+    if (contrasenya == null || contrasenya == "") {
+      txt = "Se ha cancelado la votación";
+      document.getElementById("cancell").innerHTML = txt;
+    } else {
+        document.getElementById("contra"+id).value = contrasenya;
+        
+        document.getElementById("formu"+id).submit();
+    }
+    
 }

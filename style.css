@@ -120,6 +120,11 @@ textarea{
   position: relative;
 }
 
+.respuestas {
+  width: 350px;
+  height: 30px;
+  position: relative;
+}
 
 img#home{
 	height: 50px;
