@@ -59,15 +59,15 @@
 
 			foreach($arrayEmails as $email){
 				$titulo    = 'Has sido invitado';
-				$mensaje   = 'Ha sido usted invitado para votar a la pregunta: ' . $_POST['pregunta2'];
+				$mensaje   = 'Ha sido usted invitado para votar a una pregunta. Haga click en el siguiente enlace ' . "\n" . 'adricardenaslara.tk';
 				$cabeceras = 'From: adrytaisho@gmail.com' . "\r\n" .
 					'Reply-To: adrytaisho@gmail.com' . "\r\n" .
 					'X-Mailer: PHP/' . phpversion();
 
 				//mail ($email, $titulo, $mensaje, $cabeceras);
-				echo "<p>correo enviado</p>";
+				
 			}
-			
+			 echo "<p>correo enviado</p>";
 			
 		}
 
