@@ -35,8 +35,13 @@ function setPass(id){
 
     } else {
         document.getElementById("contra"+id).value = contrasenya;
-        document.getElementById("setContra"+id).setAttribute("type","submit");
-        document.getElementById("formu"+id).submit();
+        /*document.getElementById("setContra"+id).setAttribute("type","submit");
+        document.getElementById("formu"+id).submit();*/
     }
     
+}
+
+function envia(id){
+  document.getElementById("setContra"+id).setAttribute("type","submit");
+  document.getElementById("formu"+id).submit();
 }
