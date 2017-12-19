@@ -64,7 +64,7 @@
 					'Reply-To: adrytaisho@gmail.com' . "\r\n" .
 					'X-Mailer: PHP/' . phpversion();
 
-				//mail ($email, $titulo, $mensaje, $cabeceras);
+				mail ($email, $titulo, $mensaje, $cabeceras);
 				
 			}
 			 echo "<p>correo enviado</p>";
