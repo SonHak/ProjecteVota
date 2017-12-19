@@ -36,7 +36,7 @@ if(!$registrado){
                 VALUES (?, ?, ?)");
     $query->execute(array($nombre, $email, $contra_enc));
 
-    echo(' <p style="color:red; font-size:20px">Las contraseñas no coinciden</p>');
+    
     echo("<a href='inicioLogin.php'><button type='button'>Volver</button></a>");
     
   } catch (PDOException $e) {
